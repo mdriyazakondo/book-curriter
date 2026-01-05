@@ -3,11 +3,9 @@ import Container from "../../../shared/Container/Container";
 import "leaflet/dist/leaflet.css";
 
 import L from "leaflet";
-// Import kora marker icon gulo use korlam
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
-// Emerald Green Marker toiri korar jonno (Optional but looks great)
 const DefaultIcon = L.icon({
   iconUrl: markerIcon,
   shadowUrl: markerShadow,
@@ -58,7 +56,8 @@ const Coverage = () => {
               center={center}
               zoom={8}
               scrollWheelZoom={false}
-              style={{ height: "100%", width: "100%" }}
+              style={{ height: "100%", width: "95%", overflow: "hidden" }}
+              className="overflow-hidden"
             >
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
