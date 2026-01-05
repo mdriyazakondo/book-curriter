@@ -6,7 +6,7 @@ const OrderTableRow = ({ order, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const {
     _id,
-    name,
+    bookName,
     authorName,
     customerName,
     customerEmail,
@@ -17,16 +17,16 @@ const OrderTableRow = ({ order, refetch }) => {
     quantity,
     image,
   } = order;
+  console.log(order);
 
-  // Cancel Handler
   const handleCencelled = async (order) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
       text: "Do you want to cancel this order?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#10b981", // Emerald 500
-      cancelButtonColor: "#f43f5e", // Rose 500
+      confirmButtonColor: "#10b981",
+      cancelButtonColor: "#f43f5e",
       confirmButtonText: "Yes, cancel it!",
       customClass: {
         popup: "rounded-[24px]",
@@ -54,32 +54,31 @@ const OrderTableRow = ({ order, refetch }) => {
     }
   };
 
-  // Payment Handler
   const handlePayment = async (payment) => {
     const paymentInfo = {
-      name: payment.name,
+      name: payment.bookName,
       price: payment.price,
       customerEmail: payment.customerEmail,
       _id: payment._id,
       authorName: payment.authorName,
     };
+    console.log(payment);
     const res = await axiosSecure.post(`/create-checkout-session`, paymentInfo);
     window.location.href = res.data.url;
   };
 
   return (
     <tr className="hover:bg-slate-50 transition-colors group">
-      {/* Book Information (Combined) */}
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex items-center gap-4">
           <img
             src={image}
-            alt={name}
+            alt={bookName}
             className="w-12 h-16 object-cover rounded-lg shadow-sm group-hover:scale-105 transition-transform"
           />
           <div className="text-left">
             <p className="text-sm font-bold text-slate-900 line-clamp-1">
-              {name}
+              {bookName}
             </p>
             <p className="text-[11px] text-slate-400 font-medium">
               {authorName}
@@ -88,13 +87,11 @@ const OrderTableRow = ({ order, refetch }) => {
         </div>
       </td>
 
-      {/* Customer Info */}
       <td className="px-6 py-4 text-center">
         <p className="text-sm font-semibold text-slate-700">{customerName}</p>
         <p className="text-[10px] text-slate-400">{customerEmail}</p>
       </td>
 
-      {/* Payment Status Badge */}
       <td className="px-6 py-4 text-center">
         <span
           className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
@@ -107,7 +104,6 @@ const OrderTableRow = ({ order, refetch }) => {
         </span>
       </td>
 
-      {/* Delivery Status Badge */}
       <td className="px-6 py-4 text-center">
         <span
           className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
@@ -122,13 +118,11 @@ const OrderTableRow = ({ order, refetch }) => {
         </span>
       </td>
 
-      {/* Price & Quantity */}
       <td className="px-6 py-4 text-center">
         <p className="text-sm font-black text-slate-900">${price}</p>
         <p className="text-[10px] text-slate-400 font-bold">Qty: {quantity}</p>
       </td>
 
-      {/* Date */}
       <td className="px-6 py-4 text-center">
         <div className="flex flex-col items-center text-slate-500">
           <FaCalendarAlt className="text-xs mb-1 opacity-40" />
@@ -142,7 +136,6 @@ const OrderTableRow = ({ order, refetch }) => {
         </div>
       </td>
 
-      {/* Actions */}
       <td className="px-6 py-4 text-center">
         <div className="flex items-center justify-center gap-2">
           <button

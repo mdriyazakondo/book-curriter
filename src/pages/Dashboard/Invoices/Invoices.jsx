@@ -17,9 +17,10 @@ const Invoices = () => {
     },
   });
 
+  console.log(payments);
+
   if (isLoading) return <Loading />;
 
-  // Financial Stats
   const totalPaid = payments.reduce(
     (acc, curr) => acc + (parseFloat(curr.price) || 0),
     0
@@ -27,7 +28,6 @@ const Invoices = () => {
 
   return (
     <div className="animate-in fade-in duration-700 pb-10">
-      {/* Header & Stats Section */}
       <div className="mb-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
         <div>
           <div className="flex items-center gap-2 text-emerald-600 font-black text-[10px] uppercase tracking-[3px] mb-2">
@@ -41,9 +41,8 @@ const Invoices = () => {
           </p>
         </div>
 
-        {/* Financial Summary Cards */}
         <div className="flex items-center gap-4">
-          <div className="bg-emerald-600 text-white p-5 rounded-[24px] shadow-xl shadow-emerald-200 flex items-center gap-5 min-w-[200px]">
+          <div className="bg-emerald-600 text-white p-5 rounded-3xl shadow-xl shadow-emerald-200 flex items-center gap-5 min-w-[200px]">
             <div className="bg-white/20 p-3 rounded-xl">
               <FaCheckCircle size={20} />
             </div>
@@ -55,7 +54,7 @@ const Invoices = () => {
             </div>
           </div>
 
-          <div className="bg-white border border-slate-100 p-5 rounded-[24px] shadow-sm flex items-center gap-5 min-w-[180px]">
+          <div className="bg-white border border-slate-100 p-5 rounded-3xl shadow-sm flex items-center gap-5 min-w-[180px]">
             <div className="bg-slate-100 text-slate-900 p-3 rounded-xl">
               <FaReceipt size={20} />
             </div>
@@ -71,8 +70,7 @@ const Invoices = () => {
         </div>
       </div>
 
-      {/* Modern Table Container */}
-      <div className="bg-white rounded-[32px] shadow-sm border border-slate-100 overflow-hidden">
+      <div className="bg-white rounded-4xl shadow-sm border border-slate-100 overflow-hidden">
         <div className="overflow-x-auto px-2">
           <table className="min-w-full leading-normal">
             <thead>

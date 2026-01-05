@@ -202,7 +202,6 @@ const BookDetails = () => {
           </div>
         </div>
 
-        {/* Rating Section */}
         <div className="mt-12">
           <BookRating book={book} />
         </div>
@@ -217,7 +216,6 @@ const BookDetails = () => {
   );
 };
 
-// Sub-component for Spec Items
 const SpecItem = ({ icon, label, value }) => (
   <div className="flex flex-col gap-1">
     <div className="flex items-center gap-2 text-slate-300">

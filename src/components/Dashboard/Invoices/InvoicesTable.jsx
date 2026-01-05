@@ -1,4 +1,3 @@
-import React from "react";
 import { FaCopy, FaDownload, FaCalendarCheck } from "react-icons/fa";
 import Swal from "sweetalert2";
 
@@ -12,8 +11,8 @@ const InvoicesTable = ({ order }) => {
     status,
     payment_date,
   } = order;
+  console.log(order);
 
-  // Transaction ID Copy Handler
   const handleCopy = (id) => {
     navigator.clipboard.writeText(id);
     Swal.fire({
@@ -30,14 +29,13 @@ const InvoicesTable = ({ order }) => {
 
   return (
     <tr className="group hover:bg-slate-50 transition-all duration-300">
-      {/* Book Name */}
       <td className="py-5 px-6">
         <p className="text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
           {bookName}
         </p>
       </td>
 
-      {/* Customer Info */}
+
       <td className="py-5 px-6 text-center">
         <div className="flex flex-col items-center">
           <span className="text-sm font-semibold text-slate-700">

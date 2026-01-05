@@ -3,7 +3,6 @@ import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import OrderTableRow from "../../../components/Dashboard/OrderTableRow/OrderTableRow";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-// import Loading from "../../shared/Loading/Loading";
 import { FaBox, FaWallet, FaShoppingBag, FaHistory } from "react-icons/fa";
 import Loading from "../../../shared/Loading/Loading";
 
@@ -23,9 +22,10 @@ const MyOrders = () => {
     },
   });
 
+  console.log(orders);
+
   if (isLoading) return <Loading />;
 
-  // Quick Stats Calculation
   const totalSpent = orders.reduce(
     (acc, curr) => acc + (parseFloat(curr.price) || 0),
     0
@@ -33,7 +33,6 @@ const MyOrders = () => {
 
   return (
     <div className="animate-in fade-in duration-700 pb-10">
-      {/* Header Section */}
       <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <div className="flex items-center gap-2 text-emerald-600 font-black text-[10px] uppercase tracking-[3px] mb-2">
@@ -47,7 +46,6 @@ const MyOrders = () => {
           </p>
         </div>
 
-        {/* Mini Stats Card */}
         <div className="flex items-center gap-4">
           <div className="bg-white border border-slate-100 p-4 rounded-2xl shadow-sm flex items-center gap-4 group hover:border-emerald-200 transition-all">
             <div className="bg-emerald-50 p-3 rounded-xl text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all">
@@ -78,8 +76,7 @@ const MyOrders = () => {
         </div>
       </div>
 
-      {/* Table Section */}
-      <div className="bg-white rounded-[32px] shadow-sm border border-slate-100 overflow-hidden">
+      <div className="bg-white rounded-4xl shadow-sm border border-slate-100 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full leading-normal">
             <thead>
