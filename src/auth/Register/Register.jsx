@@ -1,4 +1,4 @@
-import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { IoIosPhotos } from "react-icons/io";
 import { Link, useLocation, useNavigate } from "react-router";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
@@ -8,6 +8,7 @@ import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
 import { imageUpload } from "../../utils";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useState } from "react";
 
 const Register = () => {
   const {
@@ -16,6 +17,8 @@ const Register = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  const [isShow, setShow] = useState(false);
 
   const { createUserFunc } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -171,12 +174,14 @@ const Register = () => {
             >
               Security Password
             </label>
+
             <div
               className={`flex items-center bg-slate-50 border ${
                 errors.password ? "border-rose-300" : "border-slate-200"
               } rounded-2xl px-4 py-3 focus-within:ring-2 focus-within:ring-emerald-500/20 focus-within:border-emerald-500 transition-all`}
             >
               <FaLock className="text-slate-400 mr-3" />
+
               <input
                 {...register("password", {
                   required: "Password is required",
@@ -186,12 +191,22 @@ const Register = () => {
                     message: "Include 1 upper, 1 lower, 1 number & 1 symbol",
                   },
                 })}
-                type="password"
+                type={isShow ? "text" : "password"} // isShow state er upor base kore type change hobe
                 id="password"
                 placeholder="••••••••"
                 className="w-full bg-transparent outline-none text-slate-900 placeholder:text-slate-400 text-sm font-medium"
               />
+
+              {/* Toggle Button */}
+              <button
+                type="button" // Form submit hoye jawa rodh korte type="button" dorkar
+                onClick={() => setShow(!isShow)} // setIsShow use kore state toggle kora hocche
+                className="text-slate-400 cursor-pointer hover:text-slate-600 focus:outline-none ml-2"
+              >
+                {isShow ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+              </button>
             </div>
+
             {errors.password && (
               <p className="text-rose-500 text-[10px] font-bold mt-1 ml-2">
                 {errors.password.message}
