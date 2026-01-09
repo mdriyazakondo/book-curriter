@@ -9,6 +9,10 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 import { Link } from "react-router";
+import ManagementCard from "../LibrrianDashboard/ManagementCard";
+import TotalOrder from "../LibrrianDashboard/TotalOrder";
+import TotalInvest from "../LibrrianDashboard/TotalInvest";
+import TotalBook from "../LibrrianDashboard/TotalBook";
 
 const LibrarianDashboard = () => {
   const stats = [
@@ -61,7 +65,14 @@ const LibrarianDashboard = () => {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-10">
+        <TotalOrder />
+        <TotalInvest />
+        <TotalBook />
+        <TotalBook />
+        <TotalBook />
+      </div>
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         {stats.map((stat) => (
           <div
             key={stat.id}
@@ -80,7 +91,7 @@ const LibrarianDashboard = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
@@ -157,18 +168,5 @@ const LibrarianDashboard = () => {
     </div>
   );
 };
-
-const ManagementCard = ({ to, title, desc, icon }) => (
-  <Link
-    to={to}
-    className="bg-white p-8 rounded-[32px] border border-slate-100 hover:border-emerald-500/30 transition-all group shadow-sm hover:shadow-xl hover:shadow-emerald-500/5"
-  >
-    <div className="text-emerald-500 text-2xl mb-4 group-hover:scale-110 transition-transform">
-      {icon}
-    </div>
-    <h4 className="font-black text-slate-900 mb-2">{title}</h4>
-    <p className="text-slate-500 text-xs leading-relaxed">{desc}</p>
-  </Link>
-);
 
 export default LibrarianDashboard;
