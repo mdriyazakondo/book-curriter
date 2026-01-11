@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FaWallet } from "react-icons/fa"; // Investment-er jonno Wallet icon
 
 const TotalInvest = () => {
-  const { user } = useAuth();
+  const { user, setIsLoadingLibrean } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const { data: orders = [], isLoading } = useQuery({
@@ -18,7 +18,7 @@ const TotalInvest = () => {
     enabled: !!user?.email,
   });
 
-  if (isLoading) return <Loading />;
+  if (isLoading) setIsLoadingLibrean(true);
 
   // Total investment calculation
   const totalSpent = orders.reduce(

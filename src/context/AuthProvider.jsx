@@ -16,6 +16,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isLoadingLibrean, setIsLoadingLibrean] = useState(false);
 
   const createUserFunc = (email, password) => {
     setLoading(true);
@@ -53,6 +54,8 @@ const AuthProvider = ({ children }) => {
     loginUserFunc,
     googleUserFunc,
     logoutUserFunc,
+    isLoadingLibrean,
+    setIsLoadingLibrean,
   };
 
   return (

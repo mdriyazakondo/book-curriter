@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../shared/Loading/Loading";
 
 const TotalBook = () => {
-  const { user } = useAuth();
+  const { user, setIsLoadingLibrean } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const { data: books = [], isLoading } = useQuery({
@@ -17,8 +17,7 @@ const TotalBook = () => {
     },
     enabled: !!user?.email,
   });
-
-  if (isLoading) return <Loading />;
+  if (isLoading) setIsLoadingLibrean(true);
 
   return (
     <div className="bg-white p-6 rounded-[24px] border border-slate-100 shadow-sm flex items-center gap-5 group hover:shadow-md hover:border-indigo-200 transition-all duration-300">

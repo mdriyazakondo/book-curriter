@@ -13,39 +13,13 @@ import ManagementCard from "../LibrrianDashboard/ManagementCard";
 import TotalOrder from "../LibrrianDashboard/TotalOrder";
 import TotalInvest from "../LibrrianDashboard/TotalInvest";
 import TotalBook from "../LibrrianDashboard/TotalBook";
+import useAuth from "../../../hooks/useAuth";
+import Loading from "../../../shared/Loading/Loading";
 
 const LibrarianDashboard = () => {
-  const stats = [
-    {
-      id: 1,
-      label: "Total Books",
-      value: "1,240",
-      icon: <FaBook />,
-      color: "bg-emerald-500",
-    },
-    {
-      id: 2,
-      label: "Active Orders",
-      value: "85",
-      icon: <FaClipboardList />,
-      color: "bg-slate-900",
-    },
-    {
-      id: 3,
-      label: "Total Readers",
-      value: "450",
-      icon: <FaUsers />,
-      color: "bg-emerald-600",
-    },
-    {
-      id: 4,
-      label: "Stock Alerts",
-      value: "12",
-      icon: <FaExclamationCircle />,
-      color: "bg-rose-500",
-    },
-  ];
+  const { setIsLoadingLibrean } = useAuth();
 
+  if (setIsLoadingLibrean) <Loading />;
   return (
     <div className="min-h-screen animate-in fade-in duration-700 pb-10">
       <div className="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -65,33 +39,11 @@ const LibrarianDashboard = () => {
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 mb-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6 mb-10">
+        <TotalBook />
         <TotalOrder />
         <TotalInvest />
-        <TotalBook />
-        <TotalBook />
-        <TotalBook />
       </div>
-      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-        {stats.map((stat) => (
-          <div
-            key={stat.id}
-            className="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm flex items-center gap-5 group hover:border-emerald-200 transition-all"
-          >
-            <div
-              className={`${stat.color} w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg`}
-            >
-              {stat.icon}
-            </div>
-            <div>
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                {stat.label}
-              </p>
-              <p className="text-2xl font-black text-slate-900">{stat.value}</p>
-            </div>
-          </div>
-        ))}
-      </div> */}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">

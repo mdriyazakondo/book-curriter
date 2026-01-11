@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FaShoppingBasket } from "react-icons/fa"; // Icon ta change korechi order er sathe mil rekhe
 
 const TotalOrder = () => {
-  const { user } = useAuth();
+  const { user, setIsLoadingLibrean } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const { data: orders = [], isLoading } = useQuery({
@@ -15,11 +15,11 @@ const TotalOrder = () => {
       const res = await axiosSecure.get(`/orders/${user?.email}/payments`);
       return res.data;
     },
-    enabled: !!user?.email, // User email thaklei query cholbe
+    enabled: !!user?.email,
   });
 
-  if (isLoading) return <Loading />;
-
+  if (isLoading) setIsLoadingLibrean(true);
+  
   return (
     <div className="bg-white p-6 rounded-[24px] border border-slate-100 shadow-sm flex items-center gap-5 group hover:shadow-md hover:border-emerald-200 transition-all duration-300">
       {/* Icon Section */}
