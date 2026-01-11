@@ -47,9 +47,9 @@ const GoogleLogin = () => {
   return (
     <button
       onClick={handleGoogleLogin}
-      className="w-full flex items-center justify-center gap-3 py-4 border border-slate-200 rounded-2xl bg-white text-slate-700 font-bold text-sm hover:bg-slate-50 hover:border-slate-300 transition-all duration-300 active:scale-[0.98]"
+      className="w-full flex items-center justify-center gap-3 py-4 border border-slate-200 dark:border-slate-700 rounded-2xl bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600 transition-all duration-300 active:scale-[0.98] cursor-pointer"
     >
-      <FaGoogle className="text-rose-500 text-lg" />
+      <FaGoogle className="text-rose-500 text-lg dark:text-rose-400" />
       Continue with Google
     </button>
   );

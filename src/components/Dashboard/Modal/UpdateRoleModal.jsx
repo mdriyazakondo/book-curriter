@@ -5,13 +5,18 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const UpdateRoleModal = ({ isOpen, closeModal, user, refetch }) => {
   const [updatedRole, setUpdatedRole] = useState(user?.role);
   const axiosSecure = useAxiosSecure();
+
+  // ইউজার পরিবর্তন হলে যেন ড্রপডাউন ভ্যালু আপডেট হয়
+  useEffect(() => {
+    if (user?.role) setUpdatedRole(user.role);
+  }, [user]);
 
   const handleUpdateRole = async () => {
     try {
@@ -22,19 +27,21 @@ const UpdateRoleModal = ({ isOpen, closeModal, user, refetch }) => {
 
       if (data.modifiedCount > 0) {
         Swal.fire({
-          title: "Updated!",
-          text: `User role has been updated to ${updatedRole}.`,
+          title: "Success!",
+          text: `Role updated to ${updatedRole}`,
           icon: "success",
           timer: 1500,
           showConfirmButton: false,
+          customClass: {
+            popup: "rounded-[24px] dark:bg-slate-900 dark:text-white",
+          },
         });
         refetch();
       }
     } catch (error) {
-      console.error("Error updating role:", error);
       Swal.fire({
         title: "Error!",
-        text: "Something went wrong while updating the role.",
+        text: "Could not update role.",
         icon: "error",
       });
     } finally {
@@ -44,8 +51,8 @@ const UpdateRoleModal = ({ isOpen, closeModal, user, refetch }) => {
 
   return (
     <Transition grow show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-50" onClose={closeModal}>
-        {/* ব্যাকগ্রাউন্ড আবছা করার জন্য ওভারলে */}
+      <Dialog as="div" className="relative z-[100]" onClose={closeModal}>
+        {/* Overlay with glassmorphism */}
         <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"
@@ -55,7 +62,7 @@ const UpdateRoleModal = ({ isOpen, closeModal, user, refetch }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black/25" />
+          <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm" />
         </TransitionChild>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -63,44 +70,51 @@ const UpdateRoleModal = ({ isOpen, closeModal, user, refetch }) => {
             <TransitionChild
               as={Fragment}
               enter="ease-out duration-300"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
+              enterFrom="opacity-0 scale-95 translate-y-4"
+              enterTo="opacity-100 scale-100 translate-y-0"
               leave="ease-in duration-200"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
+              leaveFrom="opacity-100 scale-100 translate-y-0"
+              leaveTo="opacity-0 scale-95 translate-y-4"
             >
-              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-[32px] bg-white dark:bg-slate-900 p-8 text-left align-middle shadow-2xl border border-slate-100 dark:border-slate-800 transition-all">
                 <DialogTitle
                   as="h3"
-                  className="text-lg font-bold leading-6 text-gray-900 border-b pb-2"
+                  className="text-xl font-black leading-6 text-slate-900 dark:text-white tracking-tight"
                 >
-                  Update User Role
+                  Modify User{" "}
+                  <span className="text-emerald-600 dark:text-emerald-400">
+                    Permissions
+                  </span>
                 </DialogTitle>
 
-                <div className="mt-4">
-                  <p className="text-sm text-gray-500 mb-2">
-                    Updating role for:{" "}
-                    <span className="font-semibold text-gray-800">
+                <div className="mt-6">
+                  <div className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-800 mb-6">
+                    <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">
+                      Target Account
+                    </p>
+                    <p className="text-sm font-bold text-slate-700 dark:text-slate-200 truncate">
                       {user?.email}
-                    </span>
-                  </p>
+                    </p>
+                  </div>
 
+                  <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[2px] mb-2 block ml-1">
+                    Assign New Role
+                  </label>
                   <select
                     value={updatedRole}
                     onChange={(e) => setUpdatedRole(e.target.value)}
-                    className="w-full mt-2 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
-                    name="role"
+                    className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500/50 outline-none transition-all font-bold text-sm cursor-pointer appearance-none shadow-sm"
                   >
                     <option value="customer">Customer</option>
                     <option value="Librarian">Librarian</option>
-                    <option value="admin">Admin</option>
+                    <option value="admin">Administrator</option>
                   </select>
                 </div>
 
-                <div className="flex mt-6 justify-end gap-3">
+                <div className="flex mt-8 justify-end gap-3">
                   <button
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 transition-colors cursor-pointer"
+                    className="px-6 py-3 text-xs font-black uppercase tracking-widest text-slate-400 hover:text-rose-500 transition-colors"
                     onClick={closeModal}
                   >
                     Cancel
@@ -108,9 +122,9 @@ const UpdateRoleModal = ({ isOpen, closeModal, user, refetch }) => {
                   <button
                     onClick={handleUpdateRole}
                     type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 transition-colors cursor-pointer shadow-md"
+                    className="bg-slate-900 dark:bg-emerald-600 hover:bg-emerald-700 dark:hover:bg-emerald-500 text-white dark:text-slate-900 px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
                   >
-                    Update Role
+                    Update Now
                   </button>
                 </div>
               </DialogPanel>

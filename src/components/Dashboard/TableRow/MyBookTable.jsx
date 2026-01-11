@@ -11,31 +11,35 @@ const MyBookTable = ({ book, handleDelete, refetch }) => {
     book;
 
   return (
-    <tr className="hover:bg-slate-50/50 transition-colors group border-b border-slate-50 last:border-0">
+    <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors group border-b border-slate-50 dark:border-slate-800 last:border-0">
+      {/* Book Cover */}
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex justify-center">
           <img
             src={image}
             alt={bookName}
-            className="w-12 h-16 object-cover rounded-lg shadow-sm group-hover:shadow-md transition-shadow ring-1 ring-slate-100"
+            className="w-12 h-16 object-cover rounded-lg shadow-sm group-hover:shadow-md transition-shadow ring-1 ring-slate-100 dark:ring-slate-700"
           />
         </div>
       </td>
 
+      {/* Book Name */}
       <td className="px-6 py-4 whitespace-nowrap">
-        <p className="text-sm font-bold text-slate-800 group-hover:text-emerald-600 transition-colors">
+        <p className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
           {bookName}
         </p>
       </td>
 
+      {/* Author Name */}
       <td className="px-6 py-4 whitespace-nowrap">
-        <p className="text-sm text-slate-500 font-medium italic">
+        <p className="text-sm text-slate-500 dark:text-slate-400 font-medium italic">
           {authorName}
         </p>
       </td>
 
+      {/* Date */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
-        <p className="text-xs text-slate-400 font-bold uppercase tracking-tighter">
+        <p className="text-xs text-slate-400 dark:text-slate-500 font-bold uppercase tracking-tighter">
           {new Date(create_date).toLocaleDateString("en-GB", {
             day: "2-digit",
             month: "short",
@@ -44,23 +48,28 @@ const MyBookTable = ({ book, handleDelete, refetch }) => {
         </p>
       </td>
 
+      {/* Price */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
-        <p className="text-sm font-black text-emerald-600">${price}</p>
+        <p className="text-sm font-black text-emerald-600 dark:text-emerald-400">
+          ${price}
+        </p>
       </td>
 
+      {/* Language */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
-        <span className="px-2 py-0.5 bg-slate-100 text-slate-600 text-[10px] font-bold rounded uppercase tracking-wider">
+        <span className="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold rounded uppercase tracking-wider">
           {language}
         </span>
       </td>
 
+      {/* Status Button/Badge */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
         <button
           onClick={() => setIsOpen(true)}
           className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border transition-all ${
             status === "published"
-              ? "bg-emerald-50 text-emerald-600 border-emerald-100"
-              : "bg-amber-50 text-amber-600 border-amber-100"
+              ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-500/20"
+              : "bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-500/20"
           }`}
         >
           {status}
@@ -74,23 +83,26 @@ const MyBookTable = ({ book, handleDelete, refetch }) => {
         />
       </td>
 
+      {/* Actions */}
       <td className="px-6 py-4 whitespace-nowrap text-right">
         <div className="flex items-center justify-end gap-2">
+          {/* Edit Button */}
           <Link
             to={`/dashboard/update-book/${book._id}`}
-            className="p-2.5 bg-white hover:bg-slate-900 text-slate-600 hover:text-white border border-slate-200 rounded-xl transition-all duration-300 shadow-sm"
+            className="p-2.5 bg-white dark:bg-slate-800 hover:bg-slate-900 dark:hover:bg-emerald-500 text-slate-600 dark:text-slate-400 hover:text-white dark:hover:text-white border border-slate-200 dark:border-slate-700 rounded-xl transition-all duration-300 shadow-sm"
             title="Update Book"
           >
             <FaEdit size={14} />
           </Link>
 
+          {/* Delete Button */}
           <button
             disabled={status === "published"}
             onClick={() => handleDelete(book._id)}
             className={`p-2.5 rounded-xl border transition-all duration-300 shadow-sm ${
               status === "published"
-                ? "bg-slate-50 text-slate-300 border-slate-100 cursor-not-allowed"
-                : "bg-white hover:bg-rose-600 text-rose-500 hover:text-white border-rose-100 hover:border-rose-600"
+                ? "bg-slate-50 dark:bg-slate-800 text-slate-300 dark:text-slate-600 border-slate-100 dark:border-slate-700 cursor-not-allowed"
+                : "bg-white dark:bg-slate-800 hover:bg-rose-600 text-rose-500 dark:text-rose-400 hover:text-white border-rose-100 dark:border-rose-900/30 hover:border-rose-600"
             }`}
             title={
               status === "published"

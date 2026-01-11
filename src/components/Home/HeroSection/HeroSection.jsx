@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 import { Pagination, Autoplay, Navigation } from "swiper/modules";
 import { Link } from "react-router";
 
-// Static Data
+// Static Data (Same as before)
 const staticSliders = [
   {
     _id: "1",
@@ -16,7 +16,7 @@ const staticSliders = [
       "Discover the secrets of the world's most creative people and how you can apply their methods to your own life and work.",
     price: 25.5,
     image:
-      "https://m.media-amazon.com/images/I/41JxG-hSKSL._SL10_UR1600,800_CR200,50,1024,512_CLa%7C1024,512%7C41JxG-hSKSL.jpg%7C0,0,1024,512+67,67,376,376_PJAdblSocialShare-Gradientoverlay-twitter-largeasin-0to60,TopLeft,0,0_PJAdblSocialShare-AudibleLogo-Medium,TopLeft,490,223_OU01_ZBLISTENING%20ON,483,152,55,450,AudibleSansMd,32,255,255,255.jpg",
+      "https://m.media-amazon.com/images/I/41JxG-hSKSL._SL10_UR1600,800_CR200,50,1024,512_CLa%7C1024,512%7C41JxG-hSKSL.jpg",
     status: "published",
   },
   {
@@ -53,49 +53,52 @@ const HeroSection = () => {
         pagination={{ clickable: true, dynamicBullets: true }}
         navigation={true}
         modules={[Pagination, Autoplay, Navigation]}
-        className="mySwiper rounded-2xl overflow-hidden shadow-2xl border border-slate-100"
+        className="mySwiper rounded-3xl overflow-hidden shadow-2xl border border-slate-100 dark:border-slate-800"
       >
         {staticSliders.map((slide) => (
           <SwiperSlide key={slide._id}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-linear-to-br from-white to-slate-50 p-8 md:p-16 lg:p-20 min-h-[500px]">
+            {/* Dark mode background change: from-white to dark:from-slate-900 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 p-8 md:p-16 lg:p-20 min-h-[500px] transition-colors duration-300">
               {/* Text Content */}
               <div className="flex flex-col justify-center items-center md:items-start space-y-6 text-center md:text-left order-2 md:order-1">
-                <div className="inline-block px-4 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest">
+                <div className="inline-block px-4 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-widest">
                   Featured Release
                 </div>
 
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
                   {slide.bookName}
                 </h1>
 
                 <div className="space-y-2">
-                  <p className="text-slate-600 font-medium text-lg md:text-xl flex items-center gap-2 justify-center md:justify-start">
+                  <p className="text-slate-600 dark:text-slate-300 font-medium text-lg md:text-xl flex items-center gap-2 justify-center md:justify-start">
                     <span className="w-8 h-0.5 bg-emerald-500 hidden md:block"></span>
                     By {slide.authorName}
                   </p>
-                  <span className="inline-block text-slate-400 text-sm font-semibold uppercase tracking-wide">
+                  <span className="inline-block text-slate-400 dark:text-slate-500 text-sm font-semibold uppercase tracking-wide">
                     {slide.genre}
                   </span>
                 </div>
 
-                <p className="text-slate-500 text-base md:text-lg leading-relaxed max-w-md">
+                <p className="text-slate-500 dark:text-slate-400 text-base md:text-lg leading-relaxed max-w-md">
                   {slide.description}
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center gap-6 pt-4">
-                  <p className="text-3xl font-black text-slate-900">
+                  <p className="text-3xl font-black text-slate-900 dark:text-emerald-500">
                     ${slide.price}
                   </p>
                   <Link to={`/all-books`}>
-                    <button className="bg-slate-900 text-white px-10 py-4 rounded-full font-bold hover:bg-emerald-600 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-emerald-200">
+                    <button className="bg-slate-900 dark:bg-emerald-600 text-white px-10 py-4 rounded-full font-bold hover:bg-emerald-600 dark:hover:bg-emerald-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-emerald-200 dark:shadow-none">
                       Explore Now
                     </button>
                   </Link>
                 </div>
               </div>
 
+              {/* Image Content */}
               <div className="flex justify-center relative order-1 md:order-2">
-                <div className="absolute inset-0 bg-emerald-100 rounded-full blur-3xl opacity-30 scale-75"></div>
+                {/* Decorative Blur Circle */}
+                <div className="absolute inset-0 bg-emerald-100 dark:bg-emerald-600 rounded-full blur-3xl opacity-30 dark:opacity-10 scale-75"></div>
 
                 <div className="relative z-10 group">
                   <img
@@ -104,11 +107,12 @@ const HeroSection = () => {
                     className="h-[300px] md:h-[450px] w-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)] group-hover:scale-105 transition-transform duration-500"
                   />
 
-                  <div className="absolute -top-4 -right-4 bg-white p-4 rounded-xl shadow-xl border border-slate-50 animate-bounce">
-                    <p className="text-emerald-600 font-black text-xl leading-none">
+                  {/* Discount Badge */}
+                  <div className="absolute -top-4 -right-4 bg-white dark:bg-slate-800 p-4 rounded-xl shadow-xl border border-slate-50 dark:border-slate-700 animate-bounce">
+                    <p className="text-emerald-600 dark:text-emerald-400 font-black text-xl leading-none">
                       20%
                     </p>
-                    <p className="text-slate-400 text-[10px] font-bold uppercase">
+                    <p className="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase">
                       Off Today
                     </p>
                   </div>
@@ -119,17 +123,24 @@ const HeroSection = () => {
         ))}
       </Swiper>
 
-      {/* Custom Styles for Swiper dots */}
+      {/* Custom Styles for Swiper - Adding Dark Mode Support for Navigation */}
       <style jsx global>{`
         .swiper-pagination-bullet-active {
           background: #059669 !important;
           width: 25px !important;
           border-radius: 5px !important;
         }
+        .swiper-pagination-bullet {
+          background: #94a3b8; /* slate-400 */
+        }
         .swiper-button-next,
         .swiper-button-prev {
-          color: #0f172a !important;
-          transform: scale(0.5);
+          color: #10b981 !important; /* emerald-500 */
+          transform: scale(0.4);
+        }
+        .dark .swiper-button-next,
+        .dark .swiper-button-prev {
+          color: #34d399 !important; /* emerald-400 for dark mode */
         }
       `}</style>
     </div>

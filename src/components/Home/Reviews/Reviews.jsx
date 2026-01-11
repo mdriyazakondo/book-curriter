@@ -11,22 +11,33 @@ const Reviews = ({ reviewsPromise }) => {
   const reviews = use(reviewsPromise);
 
   return (
-    <div className=" bg-slate-50/30">
+    // Background color update for Dark Mode
+    <div className="bg-slate-50/30 dark:bg-slate-900/40 py-16 transition-colors duration-300">
       <Container>
         <div className="relative">
           <div className="mb-14 flex items-center justify-center flex-col text-center">
-            <div className="inline-block px-4 py-1.5 mb-4 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest">
+            {/* Badge */}
+            <div className="inline-block px-4 py-1.5 mb-4 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-widest">
               Testimonials
             </div>
-            <h3 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight">
+
+            {/* Title */}
+            <h3 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight">
               What Our{" "}
               <span className="text-emerald-600 italic">Customers</span> Say
             </h3>
+
+            {/* Decorative Divider */}
             <div className="w-20 h-1.5 bg-emerald-500 rounded-full mt-4 mb-6"></div>
-            <p className="text-slate-500 max-w-2xl text-base md:text-lg leading-relaxed">
+
+            {/* Description */}
+            <p className="text-slate-500 dark:text-slate-400 max-w-2xl text-base md:text-lg leading-relaxed">
               Fast and reliable book delivery right to your doorstep. Experience
               timely deliveries and excellent customer service with{" "}
-              <span className="text-slate-900 font-bold">BookCourier</span>.
+              <span className="text-slate-900 dark:text-emerald-500 font-bold">
+                BookCourier
+              </span>
+              .
             </p>
           </div>
 
@@ -53,15 +64,9 @@ const Reviews = ({ reviewsPromise }) => {
               slideShadows: false,
             }}
             breakpoints={{
-              640: {
-                slidesPerView: 1,
-              },
-              768: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
+              640: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
             }}
             modules={[EffectCoverflow, Pagination, Autoplay]}
             className="pb-16 px-4!"
@@ -69,6 +74,7 @@ const Reviews = ({ reviewsPromise }) => {
             {reviews.map((review) => (
               <SwiperSlide key={review.id} className="py-10">
                 <div className="transition-all duration-500">
+                  {/* Ensure ReviewCard has dark:bg-slate-800 or similar internal classes */}
                   <ReviewCard review={review} />
                 </div>
               </SwiperSlide>
@@ -77,14 +83,26 @@ const Reviews = ({ reviewsPromise }) => {
         </div>
       </Container>
 
+      {/* Pagination dots adjust for dark mode */}
       <style jsx global>{`
+        .swiper-pagination-bullet {
+          background: #94a3b8 !important; /* slate-400 */
+          opacity: 0.5;
+        }
+        .dark .swiper-pagination-bullet {
+          background: #475569 !important; /* slate-600 */
+        }
         .swiper-pagination-bullet-active {
-          background: #059669 !important;
+          background: #059669 !important; /* emerald-600 */
           width: 24px !important;
           border-radius: 4px !important;
+          opacity: 1 !important;
         }
         .swiper-slide-active {
           filter: drop-shadow(0 20px 25px -5px rgb(0 0 0 / 0.1));
+        }
+        .dark .swiper-slide-active {
+          filter: drop-shadow(0 20px 25px -5px rgb(0 0 0 / 0.4));
         }
       `}</style>
     </div>

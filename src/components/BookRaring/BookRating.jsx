@@ -3,10 +3,17 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
-import { FaStar, FaQuoteLeft, FaPenNib, FaCheckCircle } from "react-icons/fa";
+import {
+  FaStar,
+  FaQuoteLeft,
+  FaPenNib,
+  FaCheckCircle,
+  FaComments,
+} from "react-icons/fa";
 
 const BookRating = ({ book }) => {
   const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
   const [reviewText, setReviewText] = useState("");
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -26,138 +33,174 @@ const BookRating = ({ book }) => {
         text: "Please select stars and write a review.",
         icon: "warning",
         confirmButtonColor: "#10b981",
+        background: document.documentElement.classList.contains("dark")
+          ? "#0f172a"
+          : "#fff",
+        color: document.documentElement.classList.contains("dark")
+          ? "#fff"
+          : "#000",
       });
       return;
     }
 
     const ratingData = {
-      name: user.displayName,
-      email: user.email,
+      name: user?.displayName,
+      email: user?.email,
       message: reviewText,
       rating,
       bookId: book._id,
       date: new Date(),
     };
 
-    const res = await axiosSecure.post("/review", ratingData);
-    if (res.data.insertedId) {
-      Swal.fire({
-        title: "Review Published!",
-        text: "Thank you for sharing your thoughts.",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      setRating(0);
-      setReviewText("");
-      refetch();
+    try {
+      const res = await axiosSecure.post("/review", ratingData);
+      if (res.data.insertedId) {
+        Swal.fire({
+          title: "Review Published!",
+          text: "Thank you for sharing your thoughts.",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 2000,
+          background: document.documentElement.classList.contains("dark")
+            ? "#0f172a"
+            : "#fff",
+          color: document.documentElement.classList.contains("dark")
+            ? "#fff"
+            : "#000",
+        });
+        setRating(0);
+        setReviewText("");
+        refetch();
+      }
+    } catch (error) {
+      Swal.fire("Error", "Could not post review", "error");
     }
   };
 
   return (
-    <div className="mt-16 max-w-4xl mx-auto px-4">
+    <div className="mt-20 max-w-6xl mx-auto px-4 pb-20">
       {/* Section Header */}
-      <div className="flex items-center gap-3 mb-10">
-        <div className="h-1 w-12 bg-emerald-500 rounded-full"></div>
-        <h2 className="text-3xl font-black text-slate-900 tracking-tight">
-          Reader <span className="text-emerald-600">Reviews</span>
+      <div className="flex flex-col mb-12">
+        <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-black text-[10px] uppercase tracking-[4px] mb-2">
+          <FaComments /> Community Feedback
+        </div>
+        <h2 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+          Reader{" "}
+          <span className="text-emerald-600 dark:text-emerald-400">
+            Reviews
+          </span>
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        {/* Submit Review Form (Left/Top) */}
-        <div className="lg:col-span-5">
-          <div className="bg-white border border-slate-100 p-8 rounded-[32px] shadow-sm sticky top-24">
-            <div className="flex items-center gap-2 text-emerald-600 font-black text-[10px] uppercase tracking-[3px] mb-6">
-              <FaPenNib /> Write a Review
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* Submit Review Form (Sticky) */}
+        <div className="lg:col-span-5 lg:sticky lg:top-24">
+          <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-8 rounded-[40px] shadow-xl shadow-slate-200/50 dark:shadow-none transition-all">
+            <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 font-black text-[10px] uppercase tracking-[3px] mb-8">
+              <FaPenNib className="text-emerald-500" /> Share Your Opinion
             </div>
 
-            <div className="flex items-center gap-2 mb-6 bg-slate-50 p-4 rounded-2xl justify-center">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <button
-                  type="button"
-                  key={star}
-                  onClick={() => setRating(star)}
-                  className={`text-2xl transition-all transform hover:scale-125 ${
-                    rating >= star
-                      ? "text-emerald-500 shadow-emerald-200"
-                      : "text-slate-200"
-                  }`}
-                >
-                  <FaStar />
-                </button>
-              ))}
+            {/* Interactive Star Rating */}
+            <div className="flex flex-col items-center mb-8">
+              <div className="flex items-center gap-3 mb-2">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    type="button"
+                    onClick={() => setRating(star)}
+                    onMouseEnter={() => setHover(star)}
+                    onMouseLeave={() => setHover(0)}
+                    className={`text-3xl transition-all transform duration-300 ${
+                      (hover || rating) >= star
+                        ? "text-emerald-500 scale-110 drop-shadow-[0_0_10px_rgba(16,185,129,0.3)]"
+                        : "text-slate-200 dark:text-slate-700 hover:scale-105"
+                    }`}
+                  >
+                    <FaStar />
+                  </button>
+                ))}
+              </div>
+              <p className="text-[10px] font-black text-slate-300 dark:text-slate-600 uppercase tracking-widest">
+                {rating > 0 ? `Rating: ${rating}/5` : "Tap to rate"}
+              </p>
             </div>
 
             <textarea
-              className="w-full bg-slate-50 border-none rounded-2xl p-4 text-slate-900 font-medium focus:ring-2 focus:ring-emerald-500 transition-all placeholder:text-slate-300 mb-4 outline-none"
-              placeholder="How was your reading experience?"
+              className="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-3xl p-5 text-slate-700 dark:text-slate-200 font-medium focus:ring-2 focus:ring-emerald-500/50 transition-all placeholder:text-slate-300 dark:placeholder:text-slate-600 mb-6 outline-none resize-none"
+              placeholder="What did you love (or hate) about this book?"
               value={reviewText}
               onChange={(e) => setReviewText(e.target.value)}
-              rows={4}
+              rows={5}
             />
 
             <button
               onClick={handleRating}
-              className="w-full bg-slate-900 hover:bg-emerald-600 text-white font-black uppercase tracking-widest text-[11px] py-4 rounded-xl transition-all shadow-lg active:scale-95"
+              className="w-full bg-slate-900 dark:bg-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white font-black uppercase tracking-[2px] text-[11px] py-5 rounded-2xl transition-all shadow-lg active:scale-95"
             >
-              Post Review
+              Submit My Review
             </button>
           </div>
         </div>
 
-        {/* Display Reviews (Right/Bottom) */}
-        <div className="lg:col-span-7 space-y-6">
+        {/* Reviews List */}
+        <div className="lg:col-span-7 space-y-8">
           {reviews.length === 0 ? (
-            <div className="text-center py-20 bg-slate-50 rounded-[32px] border-2 border-dashed border-slate-200">
-              <FaQuoteLeft className="mx-auto text-slate-200 text-4xl mb-4" />
-              <p className="text-slate-400 font-bold uppercase tracking-widest text-xs italic">
-                No reviews yet. Be the first to start the conversation!
+            <div className="text-center py-32 bg-slate-50 dark:bg-slate-900/50 rounded-[48px] border-2 border-dashed border-slate-200 dark:border-slate-800">
+              <div className="w-20 h-20 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+                <FaQuoteLeft className="text-slate-200 dark:text-slate-600 text-2xl" />
+              </div>
+              <p className="text-slate-400 dark:text-slate-500 font-bold uppercase tracking-[2px] text-xs">
+                No conversations yet
+              </p>
+              <p className="text-[10px] text-slate-300 mt-2">
+                Be the first to leave a mark on this story.
               </p>
             </div>
           ) : (
             reviews.map((r) => (
               <div
                 key={r._id}
-                className="bg-white p-6 rounded-[24px] border border-slate-50 hover:border-emerald-100 transition-all group shadow-sm"
+                className="bg-white dark:bg-slate-900/40 p-8 rounded-[40px] border border-slate-50 dark:border-slate-800/50 hover:border-emerald-100 dark:hover:border-emerald-500/30 transition-all group hover:shadow-xl hover:shadow-slate-200/20 dark:hover:shadow-none"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 font-bold group-hover:bg-emerald-100 group-hover:text-emerald-600 transition-colors">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-[18px] bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 dark:text-slate-500 font-black text-lg group-hover:bg-emerald-500 group-hover:text-white transition-all duration-500">
                       {r.name?.[0]}
                     </div>
                     <div>
-                      <h4 className="text-sm font-black text-slate-900 flex items-center gap-1">
-                        {r.name}{" "}
+                      <h4 className="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                        {r.name}
                         <FaCheckCircle
                           className="text-emerald-500 text-[10px]"
                           title="Verified Reader"
                         />
                       </h4>
-                      <p className="text-[10px] font-bold text-slate-300 uppercase tracking-tighter">
+                      <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-0.5">
                         {new Date(r.date).toLocaleDateString("en-GB", {
-                          day: "2-digit",
+                          day: "numeric",
                           month: "short",
                           year: "numeric",
                         })}
                       </p>
                     </div>
                   </div>
-                  <div className="flex gap-0.5">
+                  <div className="flex gap-1 bg-slate-50 dark:bg-slate-800/80 px-3 py-1.5 rounded-full border border-slate-100 dark:border-slate-700">
                     {[...Array(5)].map((_, i) => (
                       <FaStar
                         key={i}
                         className={`text-[10px] ${
-                          i < r.rating ? "text-emerald-500" : "text-slate-100"
+                          i < r.rating
+                            ? "text-emerald-500"
+                            : "text-slate-200 dark:text-slate-700"
                         }`}
                       />
                     ))}
                   </div>
                 </div>
-                <div className="relative pl-6">
-                  <FaQuoteLeft className="absolute left-0 top-0 text-slate-100 text-xl" />
-                  <p className="text-slate-600 text-sm leading-relaxed font-medium italic">
-                    {r.message || r.reviewText}
+
+                <div className="relative">
+                  <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed font-medium italic opacity-90 group-hover:opacity-100 transition-opacity">
+                    "{r.message || r.reviewText}"
                   </p>
                 </div>
               </div>

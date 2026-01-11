@@ -51,41 +51,43 @@ export default function ServicesSection() {
   ];
 
   return (
-    <div className="bg-slate-50/50 ">
+    <div className="bg-slate-50/50 dark:bg-slate-900/20 py-16 transition-colors duration-300">
       <Container>
         <section>
+          {/* Header Section */}
           <div className="text-center mb-16">
-            <div className="inline-block px-4 py-1.5 mb-4 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest">
+            <div className="inline-block px-4 py-1.5 mb-4 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-widest">
               Premium Solutions
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight">
               Our Professional{" "}
               <span className="text-emerald-600">Services</span>
             </h2>
-            <p className="mt-5 text-slate-500 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+            <p className="mt-5 text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
               We provide a complete book courier experience—faster, safer, and
               more convenient for modern readers.
             </p>
           </div>
 
+          {/* Services Grid */}
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s, idx) => {
+            {services.map((s) => {
               const Icon = s.icon;
               return (
                 <article
                   key={s.id}
-                  className="group relative bg-white border border-slate-100 p-8 rounded-3xl shadow-sm hover:shadow-2xl hover:shadow-emerald-100/50 hover:-translate-y-2 transition-all duration-500 flex flex-col items-start"
+                  className="group relative bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-8 rounded-3xl shadow-sm hover:shadow-2xl hover:shadow-emerald-100/50 dark:hover:shadow-emerald-900/20 hover:-translate-y-2 transition-all duration-500 flex flex-col items-start"
                 >
                   {/* Icon Container */}
-                  <div className="mb-6 w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center group-hover:bg-emerald-600 transition-colors duration-500 shadow-lg shadow-slate-200">
+                  <div className="mb-6 w-14 h-14 rounded-2xl bg-slate-900 dark:bg-slate-700 flex items-center justify-center group-hover:bg-emerald-600 transition-colors duration-500 shadow-lg dark:shadow-none">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
 
                   <div className="grow">
-                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-emerald-600 transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-300">
                       {s.title}
                     </h3>
-                    <p className="mt-3 text-slate-500 text-sm leading-relaxed">
+                    <p className="mt-3 text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
                       {s.desc}
                     </p>
                   </div>
@@ -93,10 +95,10 @@ export default function ServicesSection() {
                   {/* Action Button */}
                   <button
                     aria-label={`Learn More — ${s.title}`}
-                    className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-slate-900 group-hover:text-emerald-600 transition-all"
+                    className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-slate-900 dark:text-slate-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-all"
                   >
                     Learn More
-                    <span className="w-8 h-0.5 bg-slate-200 group-hover:bg-emerald-600 group-hover:w-12 transition-all duration-500"></span>
+                    <span className="w-8 h-0.5 bg-slate-200 dark:bg-slate-700 group-hover:bg-emerald-600 dark:group-hover:bg-emerald-400 group-hover:w-12 transition-all duration-500"></span>
                   </button>
                 </article>
               );

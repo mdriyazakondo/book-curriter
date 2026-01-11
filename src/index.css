@@ -1,11 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @plugin "daisyui";
+/* 1. Tailwind Dark Mode Setup */
+@custom-variant dark (&:where(.dark, .dark *));
 
-body {
-  font-family: "Roboto", sans-serif;
+/* 2. Global Styles */
+@layer base {
+  body {
+    font-family: "Roboto", sans-serif;
+    @apply bg-white text-slate-900 transition-colors duration-300;
+  }
+
+  /* Dark Mode Body Background */
+  .dark body {
+    @apply bg-slate-950 text-slate-50;
+  }
 }
 
-/* * {
-  border: 1px solid red;
-} */
+/* 3. Custom Utility (Optional) */
+@layer utilities {
+  .nav-blur {
+    @apply backdrop-blur-md bg-white/80 dark:bg-slate-900/80;
+  }
+}

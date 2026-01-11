@@ -11,6 +11,13 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import {
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+  FaUser,
+  FaEnvelope,
+  FaBook,
+} from "react-icons/fa";
 
 const BookOrderModal = ({ isOpen, closeModal, book }) => {
   const { user } = useAuth();
@@ -29,9 +36,7 @@ const BookOrderModal = ({ isOpen, closeModal, book }) => {
   });
 
   const handleOrder = async (data) => {
-    if (!user) {
-      return navigate("/login");
-    }
+    if (!user) return navigate("/login");
 
     const bookOrderData = {
       image: book?.image,
@@ -48,33 +53,41 @@ const BookOrderModal = ({ isOpen, closeModal, book }) => {
     };
 
     Swal.fire({
-      title: "Are you sure?",
-      text: "Do you want to place this order?",
-      icon: "warning",
+      title: "Confirm Order?",
+      text: `Order for "${book?.bookName}" at $${book?.price}`,
+      icon: "question",
       showCancelButton: true,
-      confirmButtonColor: "#8b5cf6",
+      confirmButtonColor: "#10b981",
       cancelButtonColor: "#ef4444",
-      confirmButtonText: "Yes, Order it!",
+      confirmButtonText: "Confirm Order",
+      background: document.documentElement.classList.contains("dark")
+        ? "#0f172a"
+        : "#fff",
+      color: document.documentElement.classList.contains("dark")
+        ? "#fff"
+        : "#000",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           const res = await axiosSecure.post(`/orders`, bookOrderData);
-
           if (res.data?.insertedId) {
             Swal.fire({
-              title: "Order Placed!",
-              text: "Your order has been saved successfully.",
+              title: "Success!",
+              text: "Redirecting to payment...",
               icon: "success",
+              timer: 1500,
+              showConfirmButton: false,
             });
             closeModal();
-            navigate("/dashboard/my-orders");
+            // পেমেন্ট গেটওয়ের URL এখানে হ্যান্ডেল করুন
+            if (res.data.url) {
+              window.location.replace(res.data.url);
+            } else {
+              navigate("/dashboard/my-orders");
+            }
           }
         } catch (error) {
-          Swal.fire({
-            title: "Error!",
-            text: "Failed to place the order. Please try again.",
-            icon: "error",
-          });
+          Swal.fire("Error!", "Order placement failed.", "error");
         }
       }
     });
@@ -92,106 +105,130 @@ const BookOrderModal = ({ isOpen, closeModal, book }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black/30" />
+          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm dark:bg-black/80" />
         </TransitionChild>
 
         <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
+          <div className="flex min-h-full items-center justify-center p-4">
             <TransitionChild
               as={Fragment}
               enter="ease-out duration-300"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
+              enterFrom="opacity-0 scale-95 translate-y-4"
+              enterTo="opacity-100 scale-100 translate-y-0"
               leave="ease-in duration-200"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
+              leaveFrom="opacity-100 scale-100 translate-y-0"
+              leaveTo="opacity-0 scale-95 translate-y-4"
             >
-              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-[32px] bg-white dark:bg-slate-900 p-8 text-left align-middle shadow-2xl transition-all border border-slate-100 dark:border-slate-800">
                 <DialogTitle
                   as="h3"
-                  className="text-xl font-bold leading-6 text-gray-900 mb-4"
+                  className="text-2xl font-black leading-6 text-slate-900 dark:text-white mb-2 flex items-center gap-2"
                 >
-                  Confirm Your Order
+                  Confirm Order
                 </DialogTitle>
-
-                <p className="text-sm text-gray-500 mb-4">
-                  Book:{" "}
-                  <span className="font-semibold text-green-600">
-                    {book?.bookName}
-                  </span>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-8">
+                  Check your delivery details below.
                 </p>
+
+                {/* Book Summary Card */}
+                <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl mb-6 border border-slate-100 dark:border-slate-700">
+                  <img
+                    src={book?.image}
+                    alt=""
+                    className="w-12 h-16 object-cover rounded-lg shadow-sm"
+                  />
+                  <div>
+                    <p className="text-xs font-black text-emerald-600 uppercase tracking-widest">
+                      Selected Item
+                    </p>
+                    <h4 className="font-bold text-slate-800 dark:text-slate-200 line-clamp-1">
+                      {book?.bookName}
+                    </h4>
+                    <p className="text-sm font-black text-slate-900 dark:text-white">
+                      ${book?.price}
+                    </p>
+                  </div>
+                </div>
 
                 <form
                   onSubmit={handleSubmit(handleOrder)}
-                  className="space-y-4"
+                  className="space-y-5"
                 >
-                  <div>
+                  <div className="relative">
+                    <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
                     <input
                       type="text"
                       readOnly
                       {...register("name")}
-                      className="w-full border border-gray-200 py-2 px-3 bg-gray-100 rounded-md outline-none text-gray-600 cursor-not-allowed"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border-none py-3.5 pl-10 pr-4 rounded-xl text-slate-500 dark:text-slate-400 text-sm cursor-not-allowed outline-none"
                     />
                   </div>
 
-                  <div>
+                  <div className="relative">
+                    <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
                     <input
                       type="email"
                       readOnly
                       {...register("email")}
-                      className="w-full border border-gray-200 py-2 px-3 bg-gray-100 rounded-md outline-none text-gray-600 cursor-not-allowed"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border-none py-3.5 pl-10 pr-4 rounded-xl text-slate-500 dark:text-slate-400 text-sm cursor-not-allowed outline-none"
                     />
                   </div>
 
-                  <div>
+                  <div className="relative">
+                    <FaPhoneAlt className="absolute left-4 top-4 text-slate-400 text-xs" />
                     <input
                       type="number"
-                      placeholder="Enter Your Phone Number"
+                      placeholder="Phone Number"
                       {...register("number", {
                         required: "Phone number is required",
                       })}
-                      className={`w-full border py-2 px-3 rounded-md outline-none focus:border-green-500 ${
-                        errors.number ? "border-red-500" : "border-gray-300"
+                      className={`w-full bg-white dark:bg-slate-950 border py-3.5 pl-10 pr-4 rounded-xl text-sm outline-none transition-all focus:ring-2 focus:ring-emerald-500/20 ${
+                        errors.number
+                          ? "border-rose-500"
+                          : "border-slate-200 dark:border-slate-700 focus:border-emerald-500"
                       }`}
                     />
                     {errors.number && (
-                      <span className="text-red-500 text-xs">
+                      <span className="text-rose-500 text-[10px] font-bold mt-1 ml-1">
                         {errors.number.message}
                       </span>
                     )}
                   </div>
 
-                  <div>
+                  <div className="relative">
+                    <FaMapMarkerAlt className="absolute left-4 top-4 text-slate-400 text-xs" />
                     <textarea
-                      placeholder="Enter Full Delivery Address"
+                      placeholder="Full Delivery Address"
                       rows="3"
                       {...register("address", {
                         required: "Address is required",
                       })}
-                      className={`w-full border py-2 px-3 rounded-md outline-none focus:border-green-500 ${
-                        errors.address ? "border-red-500" : "border-gray-300"
+                      className={`w-full bg-white dark:bg-slate-950 border py-3.5 pl-10 pr-4 rounded-xl text-sm outline-none transition-all focus:ring-2 focus:ring-emerald-500/20 resize-none ${
+                        errors.address
+                          ? "border-rose-500"
+                          : "border-slate-200 dark:border-slate-700 focus:border-emerald-500"
                       }`}
                     ></textarea>
                     {errors.address && (
-                      <span className="text-red-500 text-xs">
+                      <span className="text-rose-500 text-[10px] font-bold mt-1 ml-1">
                         {errors.address.message}
                       </span>
                     )}
                   </div>
 
-                  <div className="flex justify-end gap-3 mt-6">
+                  <div className="flex flex-col sm:flex-row gap-3 mt-8">
                     <button
                       type="button"
                       onClick={closeModal}
-                      className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+                      className="flex-1 px-6 py-4 text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 rounded-2xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all active:scale-95"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md hover:bg-green-700 transition-colors shadow-lg"
+                      className="flex-[2] px-6 py-4 text-xs font-black uppercase tracking-widest text-white bg-slate-900 dark:bg-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-500 rounded-2xl transition-all shadow-xl shadow-slate-200 dark:shadow-none active:scale-95"
                     >
-                      Place Order
+                      Confirm & Pay
                     </button>
                   </div>
                 </form>

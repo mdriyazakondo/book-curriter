@@ -29,7 +29,7 @@ const OrderModal = ({ isOpen, closeModal, orderPayment, refetch }) => {
       text: `Are you sure you want to mark this as ${updatedStatus}?`,
       icon: "question",
       showCancelButton: true,
-      confirmButtonColor: "#10b981", 
+      confirmButtonColor: "#10b981",
       cancelButtonColor: "#f43f5e",
       confirmButtonText: "Yes, Update It",
     });

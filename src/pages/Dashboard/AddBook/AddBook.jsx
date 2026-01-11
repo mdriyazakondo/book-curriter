@@ -27,6 +27,9 @@ const AddBook = () => {
         title: "Processing...",
         text: "Uploading cover and saving book details",
         allowOutsideClick: false,
+        customClass: {
+          popup: "dark:bg-slate-800 dark:text-white rounded-[24px]",
+        },
         didOpen: () => Swal.showLoading(),
       });
 
@@ -42,7 +45,7 @@ const AddBook = () => {
         publishedYear: parseInt(data.publishedYear),
       };
 
-      delete bookData.bookCover; // Remove the file object before sending to DB
+      delete bookData.bookCover;
 
       const res = await axiosSecure.post("/books", bookData);
 
@@ -52,6 +55,9 @@ const AddBook = () => {
           text: "The new title has been added to the library.",
           icon: "success",
           confirmButtonColor: "#10b981",
+          customClass: {
+            popup: "dark:bg-slate-800 dark:text-white rounded-[24px]",
+          },
         });
         reset();
       }
@@ -61,6 +67,9 @@ const AddBook = () => {
         text: "Failed to add book. Please try again.",
         icon: "error",
         confirmButtonColor: "#f43f5e",
+        customClass: {
+          popup: "dark:bg-slate-800 dark:text-white rounded-[24px]",
+        },
       });
     }
   };
@@ -68,20 +77,22 @@ const AddBook = () => {
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="mb-8">
-        <h1 className="text-3xl font-black text-slate-900">
-          Add New <span className="text-emerald-600">Masterpiece</span>
+        <h1 className="text-3xl font-black text-slate-900 dark:text-white">
+          Add New{" "}
+          <span className="text-emerald-600 dark:text-emerald-400">
+            Masterpiece
+          </span>
         </h1>
-        <p className="text-slate-500 font-medium mt-1">
+        <p className="text-slate-500 dark:text-slate-400 font-medium mt-1">
           Expand the library collection with new titles.
         </p>
       </div>
 
-      <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-xl shadow-slate-200/50 border border-slate-100">
+      <div className="bg-white dark:bg-slate-900 p-8 md:p-12 rounded-[40px] shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800">
         <form
           onSubmit={handleSubmit(handleBookAdd)}
           className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6"
         >
-          {/* Form Group Component for cleaner code */}
           <InputField
             label="Book Name"
             icon={<FaBook />}
@@ -175,12 +186,13 @@ const AddBook = () => {
           />
 
           <div className="flex flex-col">
-            <label className="text-slate-700 text-xs font-bold uppercase tracking-widest mb-2 ml-1 flex items-center gap-2">
-              <FaLayerGroup className="text-emerald-500" /> Status
+            <label className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-widest mb-2 ml-1 flex items-center gap-2">
+              <FaLayerGroup className="text-emerald-500 dark:text-emerald-400" />{" "}
+              Status
             </label>
             <select
               {...register("status", { required: true })}
-              className="bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all"
+              className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-2xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all appearance-none"
               defaultValue="published"
             >
               <option value="published">Published</option>
@@ -189,34 +201,35 @@ const AddBook = () => {
           </div>
 
           <div className="md:col-span-2 space-y-2">
-            <label className="text-slate-700 text-xs font-bold uppercase tracking-widest mb-2 ml-1 flex items-center gap-2">
-              <FaImage className="text-emerald-500" /> Book Cover Image
+            <label className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-widest mb-2 ml-1 flex items-center gap-2">
+              <FaImage className="text-emerald-500 dark:text-emerald-400" />{" "}
+              Book Cover Image
             </label>
             <div className="relative group">
               <input
                 {...register("bookCover", { required: true })}
                 type="file"
-                className="w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-6 file:rounded-2xl file:border-0 file:text-xs file:font-black file:uppercase file:tracking-widest file:bg-slate-900 file:text-white hover:file:bg-emerald-600 transition-all cursor-pointer bg-slate-50 border border-dashed border-slate-300 rounded-3xl p-4"
+                className="w-full text-sm text-slate-500 dark:text-slate-400 file:mr-4 file:py-3 file:px-6 file:rounded-2xl file:border-0 file:text-xs file:font-black file:uppercase file:tracking-widest file:bg-slate-900 dark:file:bg-emerald-600 file:text-white hover:file:bg-emerald-600 dark:hover:file:bg-emerald-500 transition-all cursor-pointer bg-slate-50 dark:bg-slate-800 border border-dashed border-slate-300 dark:border-slate-700 rounded-3xl p-4"
               />
             </div>
           </div>
 
           <div className="md:col-span-2">
-            <label className="text-slate-700 text-xs font-bold uppercase tracking-widest mb-2 ml-1 block">
+            <label className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-widest mb-2 ml-1 block">
               Book Description
             </label>
             <textarea
               {...register("description", { required: true })}
               rows="4"
               placeholder="Write a brief summary of the book..."
-              className="w-full bg-slate-50 border border-slate-200 rounded-[24px] px-5 py-4 text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all"
+              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-[24px] px-5 py-4 text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all placeholder:text-slate-300 dark:placeholder:text-slate-600"
             />
           </div>
 
           <div className="md:col-span-2 pt-4">
             <button
               type="submit"
-              className="w-full bg-emerald-600 hover:bg-slate-900 text-white font-black uppercase tracking-[3px] py-5 rounded-[24px] shadow-lg shadow-emerald-100 transition-all duration-300 active:scale-[0.98]"
+              className="w-full bg-emerald-600 hover:bg-slate-900 dark:hover:bg-emerald-500 text-white font-black uppercase tracking-[3px] py-5 rounded-[24px] shadow-lg shadow-emerald-100 dark:shadow-none transition-all duration-300 active:scale-[0.98]"
             >
               Confirm & Add Book
             </button>
@@ -227,7 +240,6 @@ const AddBook = () => {
   );
 };
 
-// Reusable Input Component to keep the code DRY
 const InputField = ({
   label,
   icon,
@@ -238,15 +250,16 @@ const InputField = ({
   defaultValue,
 }) => (
   <div className="flex flex-col">
-    <label className="text-slate-700 text-xs font-bold uppercase tracking-widest mb-2 ml-1 flex items-center gap-2">
-      <span className="text-emerald-500">{icon}</span> {label}
+    <label className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-widest mb-2 ml-1 flex items-center gap-2">
+      <span className="text-emerald-500 dark:text-emerald-400">{icon}</span>{" "}
+      {label}
     </label>
     <input
       type={type}
       {...register(name, { required: true })}
       defaultValue={defaultValue}
       placeholder={placeholder}
-      className="bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all placeholder:text-slate-300"
+      className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-2xl px-5 py-3 text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all placeholder:text-slate-300 dark:placeholder:text-slate-600"
     />
   </div>
 );

@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import Loading from "../../../shared/Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
-import { FaWallet } from "react-icons/fa"; // Investment-er jonno Wallet icon
+import { FaWallet } from "react-icons/fa";
 
 const TotalInvest = () => {
   const { user, setIsLoadingLibrean } = useAuth();
@@ -18,7 +17,10 @@ const TotalInvest = () => {
     enabled: !!user?.email,
   });
 
-  if (isLoading) setIsLoadingLibrean(true);
+  // Sync loading state safely
+  useEffect(() => {
+    setIsLoadingLibrean(isLoading);
+  }, [isLoading, setIsLoadingLibrean]);
 
   // Total investment calculation
   const totalSpent = orders.reduce(
@@ -26,21 +28,25 @@ const TotalInvest = () => {
     0
   );
 
+  if (isLoading) return null;
+
   return (
-    <div className="bg-white p-6 rounded-[24px] border border-slate-100 shadow-sm flex items-center gap-5 group hover:shadow-md hover:border-blue-200 transition-all duration-300">
-      {/* Icon Section - Investment er jonno Blue theme use kora hoyeche */}
-      <div className="bg-blue-50 w-14 h-14 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+    <div className="bg-white dark:bg-slate-900 p-6 rounded-[24px] border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-5 group hover:shadow-md dark:hover:shadow-blue-900/10 hover:border-blue-200 dark:hover:border-blue-500/30 transition-all duration-300">
+      {/* Icon Section - Blue Theme for Investment */}
+      <div className="bg-blue-50 dark:bg-blue-500/10 w-14 h-14 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 dark:group-hover:bg-blue-500 group-hover:text-white dark:group-hover:text-white transition-colors duration-300 shadow-sm">
         <FaWallet size={24} />
       </div>
 
       {/* Text Section */}
       <div>
-        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">
           Total Investment
         </p>
         <div className="flex items-baseline gap-1">
-          <span className="text-lg font-bold text-slate-900">$</span>
-          <p className="text-2xl font-black text-slate-900">
+          <span className="text-lg font-bold text-slate-900 dark:text-blue-400">
+            $
+          </span>
+          <p className="text-2xl font-black text-slate-900 dark:text-white">
             {totalSpent.toLocaleString()}
           </p>
         </div>

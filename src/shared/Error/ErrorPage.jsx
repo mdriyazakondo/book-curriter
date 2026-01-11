@@ -22,14 +22,14 @@ const ErrorPage = () => {
             Page Not Found
           </h3>
           <p className="text-gray-500 mt-3 max-w-sm mx-auto leading-relaxed">
-            The page you're looking for doesn't exist or has been moved. 
-            Let's get you back on track.
+            The page you're looking for doesn't exist or has been moved. Let's
+            get you back on track.
           </p>
         </div>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <button
-            onClick={() => navigate(-1)} 
+            onClick={() => navigate(-1)}
             className="flex items-center justify-center gap-2 px-6 py-3 border-2 border-green-600 text-green-600 rounded-xl font-bold hover:bg-green-50 transition-all active:scale-95 cursor-pointer"
           >
             <ArrowLeftIcon className="h-5 w-5" />
@@ -38,7 +38,7 @@ const ErrorPage = () => {
 
           <button
             onClick={() => navigate("/")}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 shadow-lg shadow-green-200 transition-all active:scale-95 cursor-pointer"
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-green-700 shadow-lg shadow-green-200 transition-all active:scale-95 cursor-pointer"
           >
             <HomeIcon className="h-5 w-5" />
             Back to Home
@@ -47,8 +47,20 @@ const ErrorPage = () => {
       </div>
 
       <div className="absolute bottom-10 text-green-200 -z-10">
-        <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="100" cy="100" r="100" fill="currentColor" fillOpacity="0.1"/>
+        <svg
+          width="200"
+          height="200"
+          viewBox="0 0 200 200"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            cx="100"
+            cy="100"
+            r="100"
+            fill="currentColor"
+            fillOpacity="0.1"
+          />
         </svg>
       </div>
     </div>

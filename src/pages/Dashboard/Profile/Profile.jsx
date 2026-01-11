@@ -14,6 +14,7 @@ const Profile = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [isProfile, setIsProfile] = useState(false);
+
   const {
     data: userInfo = {},
     isLoading,
@@ -35,6 +36,9 @@ const Profile = () => {
         title: "Updating...",
         text: "Synchronizing your profile",
         allowOutsideClick: false,
+        customClass: {
+          popup: "dark:bg-slate-800 dark:text-white rounded-[24px]",
+        },
         didOpen: () => Swal.showLoading(),
       });
 
@@ -62,6 +66,9 @@ const Profile = () => {
           title: "Profile Updated!",
           text: "Changes saved successfully.",
           confirmButtonColor: "#10b981",
+          customClass: {
+            popup: "dark:bg-slate-800 dark:text-white rounded-[24px]",
+          },
         });
 
         refetch();
@@ -73,6 +80,9 @@ const Profile = () => {
           title: "No Changes",
           text: "Profile is already up to date.",
           confirmButtonColor: "#0f172a",
+          customClass: {
+            popup: "dark:bg-slate-800 dark:text-white rounded-[24px]",
+          },
         });
       }
     } catch (error) {
@@ -81,6 +91,9 @@ const Profile = () => {
         title: "Update Failed",
         text: "Could not sync profile information.",
         confirmButtonColor: "#f43f5e",
+        customClass: {
+          popup: "dark:bg-slate-800 dark:text-white rounded-[24px]",
+        },
       });
     }
   };
@@ -91,45 +104,53 @@ const Profile = () => {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-white rounded-[32px] shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden">
-        <div className="h-32 bg-slate-900 w-full relative">
+      {/* Profile Card */}
+      <div className="bg-white dark:bg-slate-900 rounded-[32px] shadow-xl shadow-slate-200/60 dark:shadow-none border border-slate-100 dark:border-slate-800 overflow-hidden">
+        {/* Banner Section */}
+        <div className="h-32 bg-slate-900 dark:bg-emerald-600/20 w-full relative">
           <div className="absolute -bottom-12 left-8">
             <img
               src={image}
               alt="Profile"
-              className="w-24 h-24 rounded-3xl border-4 border-white shadow-lg object-cover bg-white"
+              className="w-24 h-24 rounded-3xl border-4 border-white dark:border-slate-900 shadow-lg object-cover bg-white dark:bg-slate-800"
             />
           </div>
         </div>
 
+        {/* Info Section */}
         <div className="pt-16 pb-8 px-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-3">
-                <h2 className="text-2xl font-black text-slate-900">{name}</h2>
-                <span className="px-3 py-1 bg-emerald-50 text-emerald-600 text-[10px] font-black uppercase tracking-widest rounded-full border border-emerald-100">
+                <h2 className="text-2xl font-black text-slate-900 dark:text-white">
+                  {name}
+                </h2>
+                <span className="px-3 py-1 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-black uppercase tracking-widest rounded-full border border-emerald-100 dark:border-emerald-500/20">
                   {role}
                 </span>
               </div>
-              <p className="text-slate-500 font-medium">{email}</p>
+              <p className="text-slate-500 dark:text-slate-400 font-medium">
+                {email}
+              </p>
             </div>
 
             {!isProfile && (
               <button
                 onClick={() => setIsProfile(true)}
-                className="bg-slate-900 hover:bg-emerald-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-lg hover:shadow-emerald-100 active:scale-95"
+                className="bg-slate-900 dark:bg-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all shadow-lg active:scale-95"
               >
                 Edit Profile
               </button>
             )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 pt-8 border-t border-slate-50">
-            <div className="bg-slate-50 p-4 rounded-2xl">
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+          {/* Activity Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 pt-8 border-t border-slate-50 dark:border-slate-800">
+            <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-transparent dark:border-slate-800">
+              <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                 Member Since
               </p>
-              <p className="text-sm font-bold text-slate-700 mt-1">
+              <p className="text-sm font-bold text-slate-700 dark:text-slate-300 mt-1">
                 {new Date(create_date).toLocaleDateString("en-GB", {
                   day: "numeric",
                   month: "long",
@@ -137,11 +158,11 @@ const Profile = () => {
                 })}
               </p>
             </div>
-            <div className="bg-slate-50 p-4 rounded-2xl">
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+            <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-transparent dark:border-slate-800">
+              <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                 Last Activity
               </p>
-              <p className="text-sm font-bold text-slate-700 mt-1">
+              <p className="text-sm font-bold text-slate-700 dark:text-slate-300 mt-1">
                 {new Date(last_loggedIn).toLocaleString()}
               </p>
             </div>
@@ -149,15 +170,16 @@ const Profile = () => {
         </div>
       </div>
 
+      {/* Update Form Section */}
       {isProfile && (
-        <div className="bg-white p-8 rounded-[32px] shadow-xl shadow-slate-200/60 border border-slate-100 animate-in slide-in-from-bottom-4 duration-300">
+        <div className="bg-white dark:bg-slate-900 p-8 rounded-[32px] shadow-xl shadow-slate-200/60 dark:shadow-none border border-slate-100 dark:border-slate-800 animate-in slide-in-from-bottom-4 duration-300">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-black text-slate-900">
+            <h3 className="text-lg font-black text-slate-900 dark:text-white">
               Update Information
             </h3>
             <button
               onClick={() => setIsProfile(false)}
-              className="text-slate-400 hover:text-rose-500 font-bold text-xs uppercase tracking-widest"
+              className="text-slate-400 dark:text-slate-500 hover:text-rose-500 dark:hover:text-rose-400 font-bold text-xs uppercase tracking-widest transition-colors"
             >
               Cancel
             </button>
@@ -167,44 +189,46 @@ const Profile = () => {
             onSubmit={handleSubmit(handleProfileUpdate)}
             className="space-y-5"
           >
+            {/* Name Input */}
             <div className="flex flex-col">
               <label
                 htmlFor="name"
-                className="text-slate-700 text-xs font-bold uppercase tracking-wider mb-2 ml-1"
+                className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1"
               >
                 Display Name
               </label>
-              <div className="flex items-center bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 focus-within:ring-2 focus-within:ring-emerald-500/20 focus-within:border-emerald-500 transition-all">
-                <FaUser className="text-slate-400 mr-3" />
+              <div className="flex items-center bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 focus-within:ring-2 focus-within:ring-emerald-500/20 focus-within:border-emerald-500 transition-all">
+                <FaUser className="text-slate-400 dark:text-slate-500 mr-3" />
                 <input
                   {...register("name")}
                   type="text"
                   defaultValue={userInfo?.name}
                   id="name"
-                  className="w-full bg-transparent outline-none text-slate-900 text-sm font-medium"
+                  className="w-full bg-transparent outline-none text-slate-900 dark:text-white text-sm font-medium"
                 />
               </div>
             </div>
 
+            {/* Photo Input */}
             <div className="flex flex-col">
               <label
                 htmlFor="photo"
-                className="text-slate-700 text-xs font-bold uppercase tracking-wider mb-2 ml-1"
+                className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1"
               >
                 New Profile Photo
               </label>
-              <div className="flex items-center bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 focus-within:ring-2 focus-within:ring-emerald-500/20 focus-within:border-emerald-500 transition-all">
-                <IoIosPhotos className="text-slate-400 mr-3" />
+              <div className="flex items-center bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3 focus-within:ring-2 focus-within:ring-emerald-500/20 focus-within:border-emerald-500 transition-all">
+                <IoIosPhotos className="text-slate-400 dark:text-slate-500 mr-3" />
                 <input
                   {...register("photo")}
                   type="file"
                   id="photo"
-                  className="w-full bg-transparent outline-none text-slate-500 text-xs file:hidden cursor-pointer font-medium"
+                  className="w-full bg-transparent outline-none text-slate-500 dark:text-slate-400 text-xs file:hidden cursor-pointer font-medium"
                 />
               </div>
             </div>
 
-            <button className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-emerald-100 transition-all active:scale-[0.98]">
+            <button className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-emerald-100 dark:shadow-none transition-all active:scale-[0.98]">
               Save Changes
             </button>
           </form>
