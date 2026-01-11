@@ -62,8 +62,7 @@ const ManageBookModal = ({ isOpen, closeModal, bookId, refetch }) => {
 
   return (
     <Transition grow show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-[100]" onClose={closeModal}>
-        {/* Overlay */}
+      <Dialog as="div" className="relative z-100" onClose={closeModal}>
         <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"

@@ -226,7 +226,6 @@ const UpdateBook = () => {
           </div>
 
           <div className="md:col-span-2 space-y-4">
-            {/* Current Cover Preview Card */}
             <div className="flex items-center gap-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl border border-emerald-100 dark:border-emerald-800/50">
               <img
                 src={updateBooks.image}

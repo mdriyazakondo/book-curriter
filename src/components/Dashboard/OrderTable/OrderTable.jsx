@@ -11,7 +11,6 @@ const OrderTable = ({ orderPayment, refetch }) => {
 
   return (
     <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors group border-b border-slate-50 dark:border-slate-800 last:border-0">
-      {/* Book Cover */}
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex justify-center">
           <img
@@ -22,21 +21,18 @@ const OrderTable = ({ orderPayment, refetch }) => {
         </div>
       </td>
 
-      {/* Book Name */}
       <td className="px-6 py-4 whitespace-nowrap">
         <p className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
           {name}
         </p>
       </td>
 
-      {/* Author Name */}
       <td className="px-6 py-4 whitespace-nowrap">
         <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
           {authorName}
         </p>
       </td>
 
-      {/* Order Date */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
         <div className="flex items-center justify-center gap-2 text-slate-400 dark:text-slate-500">
           <FaCalendarAlt size={12} />
@@ -50,14 +46,12 @@ const OrderTable = ({ orderPayment, refetch }) => {
         </div>
       </td>
 
-      {/* Price */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
         <span className="text-sm font-black text-slate-900 dark:text-white">
           ${parseFloat(price).toFixed(2)}
         </span>
       </td>
 
-      {/* Payment Status Badge */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
         <div className="flex justify-center">
           {paymentStatus?.toLowerCase() === "paid" ? (
@@ -72,7 +66,6 @@ const OrderTable = ({ orderPayment, refetch }) => {
         </div>
       </td>
 
-      {/* Delivery Status / Modal Button */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
         <button
           onClick={() => setIsOpen(true)}

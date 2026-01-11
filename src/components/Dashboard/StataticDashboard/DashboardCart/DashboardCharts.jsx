@@ -22,8 +22,7 @@ const data = [
 const DashboardCharts = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-      {/* Area Chart - Growth Analytics */}
-      <div className="bg-white dark:bg-slate-900 p-8 rounded-[32px] shadow-sm border border-slate-100 dark:border-slate-800 transition-all hover:shadow-md">
+      <div className="bg-white dark:bg-slate-900 p-8 rounded-4xl shadow-sm border border-slate-100 dark:border-slate-800 transition-all hover:shadow-md">
         <div className="flex items-center justify-between mb-8">
           <h3 className="text-lg font-black text-slate-800 dark:text-white tracking-tight">
             Growth{" "}
@@ -85,7 +84,6 @@ const DashboardCharts = () => {
         </div>
       </div>
 
-      {/* Bar Chart - User Distribution */}
       <div className="bg-white dark:bg-slate-900 p-8 rounded-[32px] shadow-sm border border-slate-100 dark:border-slate-800 transition-all hover:shadow-md">
         <div className="flex items-center justify-between mb-8">
           <h3 className="text-lg font-black text-slate-800 dark:text-white tracking-tight">

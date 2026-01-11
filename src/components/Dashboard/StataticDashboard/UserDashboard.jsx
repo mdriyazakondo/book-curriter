@@ -15,7 +15,6 @@ const UserDashboard = () => {
 
   return (
     <div className="min-h-screen animate-in fade-in duration-700 pb-10">
-      {/* Header & Welcome */}
       <div className="mb-10">
         <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">
           Reader{" "}
@@ -27,7 +26,6 @@ const UserDashboard = () => {
         </p>
       </div>
 
-      {/* Primary Actions Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
         <UserCard
           to="/dashboard/my-orders"
@@ -57,7 +55,6 @@ const UserDashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Reading Insight Section */}
         <div className="lg:col-span-2">
           <div className="bg-white dark:bg-slate-900 p-8 rounded-[40px] border border-slate-100 dark:border-slate-800 shadow-sm relative overflow-hidden h-full">
             <div className="relative z-10">
@@ -79,14 +76,12 @@ const UserDashboard = () => {
                 <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
-            {/* Background Graphic Icon */}
+
             <FaBook className="absolute -right-10 -bottom-10 text-[200px] text-slate-50 dark:text-slate-800 opacity-[0.03] dark:opacity-[0.1] rotate-12" />
           </div>
         </div>
 
-        {/* Quick Notification/Alert Sidebar */}
         <div className="space-y-6">
-          {/* Promo Card */}
           <div className="bg-emerald-600 dark:bg-emerald-700 rounded-[40px] p-8 text-white shadow-xl shadow-emerald-500/10">
             <h4 className="text-xl font-bold mb-3">Flash Sale! ⚡</h4>
             <p className="text-emerald-100 text-sm mb-6 leading-relaxed">
@@ -100,7 +95,6 @@ const UserDashboard = () => {
             </Link>
           </div>
 
-          {/* Support Card */}
           <div className="bg-slate-50 dark:bg-slate-800/50 rounded-[40px] p-8 border border-slate-100 dark:border-slate-800">
             <h4 className="font-black text-slate-900 dark:text-white mb-2">
               Need Help?
@@ -127,7 +121,6 @@ const UserCard = ({ to, icon, title, desc, color, count }) => {
       to={to}
       className="group bg-white dark:bg-slate-900 p-8 rounded-[32px] border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 dark:hover:shadow-none hover:border-emerald-200 dark:hover:border-emerald-600/50 transition-all relative overflow-hidden"
     >
-      {/* Badge for 'Active' or 'Saved' */}
       {count && (
         <span className="absolute top-6 right-6 bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500 text-[9px] font-black px-2 py-1 rounded-lg uppercase tracking-wider group-hover:bg-emerald-50 dark:group-hover:bg-emerald-500/20 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
           {count}

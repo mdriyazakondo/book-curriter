@@ -45,7 +45,6 @@ const PaymentSuccess = () => {
           </div>
         ) : (
           <>
-            {/* Success Icon Section */}
             <div className="relative flex justify-center mb-6">
               <div className="absolute inset-0 bg-emerald-100 dark:bg-emerald-500/10 rounded-full scale-150 blur-xl opacity-50"></div>
               <div className="relative bg-emerald-500 rounded-full p-4 shadow-lg shadow-emerald-200 dark:shadow-none">
@@ -53,7 +52,6 @@ const PaymentSuccess = () => {
               </div>
             </div>
 
-            {/* Content Section */}
             <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-2">
               Payment Success!
             </h2>
@@ -68,7 +66,6 @@ const PaymentSuccess = () => {
               with all the details.
             </p>
 
-            {/* Actions Section */}
             <div className="space-y-3">
               <button
                 onClick={() => navigate("/dashboard/my-orders")}
@@ -86,7 +83,6 @@ const PaymentSuccess = () => {
               </button>
             </div>
 
-            {/* Support Info */}
             <div className="mt-8 pt-6 border-t border-gray-100 dark:border-slate-800">
               <p className="text-xs text-gray-400 dark:text-slate-500">
                 Facing issues?{" "}

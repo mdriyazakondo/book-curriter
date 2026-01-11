@@ -19,10 +19,8 @@ const Latest = () => {
   if (isLoading) return <Loading />;
 
   return (
-    // Background color update for Dark Mode
     <div className="py-16 bg-[#fcfdfe] dark:bg-slate-900/50 transition-colors duration-300">
       <Container>
-        {/* Section Header Design */}
         <div className="flex flex-col items-center mb-12">
           <div className="flex items-center gap-2 mb-2">
             <span className="w-8 h-0.5 bg-emerald-500"></span>
@@ -43,20 +41,17 @@ const Latest = () => {
           </p>
         </div>
 
-        {/* Books Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {latests?.map((latest, index) => (
             <div
               key={index}
               className="transform hover:-translate-y-2 transition-transform duration-300"
             >
-              {/* Note: Make sure BookCard internal styles also have dark mode classes */}
               <BookCard latest={latest} />
             </div>
           ))}
         </div>
 
-        {/* Bottom Action */}
         <div className="mt-16 text-center">
           <Link
             to={"/all-books"}

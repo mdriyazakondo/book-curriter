@@ -30,7 +30,7 @@ const Orders = () => {
 
   return (
     <div className="animate-in fade-in duration-700">
-      {/* Page Header & Stats */}
+
       <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h2 className="text-3xl font-black text-slate-900 dark:text-white">
@@ -61,8 +61,8 @@ const Orders = () => {
         </div>
       </div>
 
-      {/* Table Container */}
-      <div className="bg-white dark:bg-slate-900 rounded-[32px] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden transition-colors">
+ 
+      <div className="bg-white dark:bg-slate-900 rounded-4xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden transition-colors">
         <div className="overflow-x-auto">
           <table className="min-w-full leading-normal">
             <thead>

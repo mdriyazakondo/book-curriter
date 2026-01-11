@@ -16,7 +16,6 @@ const RecentUsersTable = () => {
 
   return (
     <div className="bg-white dark:bg-slate-900 rounded-[32px] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden transition-all duration-300">
-      {/* Table Header */}
       <div className="p-6 border-b border-slate-50 dark:border-slate-800 flex justify-between items-center">
         <div>
           <h3 className="text-lg font-black text-slate-800 dark:text-white tracking-tight">
@@ -35,8 +34,7 @@ const RecentUsersTable = () => {
         <table className="w-full text-left border-collapse">
           <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
             {isLoading
-              ? // Simple Loading Skeleton
-                [...Array(3)].map((_, i) => (
+              ? [...Array(3)].map((_, i) => (
                   <tr key={i} className="animate-pulse">
                     <td className="px-6 py-4 h-16 bg-slate-50/50 dark:bg-slate-800/20"></td>
                   </tr>

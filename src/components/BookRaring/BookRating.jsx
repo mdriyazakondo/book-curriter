@@ -79,7 +79,6 @@ const BookRating = ({ book }) => {
 
   return (
     <div className="mt-20 max-w-6xl mx-auto px-4 pb-20">
-      {/* Section Header */}
       <div className="flex flex-col mb-12">
         <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-black text-[10px] uppercase tracking-[4px] mb-2">
           <FaComments /> Community Feedback
@@ -93,14 +92,12 @@ const BookRating = ({ book }) => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        {/* Submit Review Form (Sticky) */}
         <div className="lg:col-span-5 lg:sticky lg:top-24">
           <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-8 rounded-[40px] shadow-xl shadow-slate-200/50 dark:shadow-none transition-all">
             <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500 font-black text-[10px] uppercase tracking-[3px] mb-8">
               <FaPenNib className="text-emerald-500" /> Share Your Opinion
             </div>
 
-            {/* Interactive Star Rating */}
             <div className="flex flex-col items-center mb-8">
               <div className="flex items-center gap-3 mb-2">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -142,7 +139,6 @@ const BookRating = ({ book }) => {
           </div>
         </div>
 
-        {/* Reviews List */}
         <div className="lg:col-span-7 space-y-8">
           {reviews.length === 0 ? (
             <div className="text-center py-32 bg-slate-50 dark:bg-slate-900/50 rounded-[48px] border-2 border-dashed border-slate-200 dark:border-slate-800">

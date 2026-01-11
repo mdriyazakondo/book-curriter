@@ -31,7 +31,6 @@ const MyOrders = () => {
 
   return (
     <div className="animate-in fade-in duration-700 pb-10">
-      {/* Header Section */}
       <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-black text-[10px] uppercase tracking-[3px] mb-2">
@@ -48,7 +47,6 @@ const MyOrders = () => {
           </p>
         </div>
 
-        {/* Stats Cards */}
         <div className="flex items-center gap-4">
           <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-4 rounded-2xl shadow-sm flex items-center gap-4 group hover:border-emerald-200 dark:hover:border-emerald-500/50 transition-all">
             <div className="bg-emerald-50 dark:bg-emerald-500/10 p-3 rounded-xl text-emerald-600 dark:text-emerald-400 group-hover:bg-emerald-600 group-hover:text-white transition-all">
@@ -80,7 +78,6 @@ const MyOrders = () => {
         </div>
       </div>
 
-      {/* Table Container */}
       <div className="bg-white dark:bg-slate-900 rounded-[32px] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full leading-normal">

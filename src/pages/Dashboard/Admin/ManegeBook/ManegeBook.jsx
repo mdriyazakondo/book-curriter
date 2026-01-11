@@ -76,7 +76,6 @@ const ManageBook = () => {
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 pb-10">
-      {/* Header Section */}
       <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-black text-[10px] uppercase tracking-[3px] mb-2">
@@ -99,8 +98,7 @@ const ManageBook = () => {
         </div>
       </div>
 
-      {/* Table Container */}
-      <div className="bg-white dark:bg-slate-900 rounded-[32px] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden transition-all duration-300">
+      <div className="bg-white dark:bg-slate-900 rounded-4xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden transition-all duration-300">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -142,7 +140,6 @@ const ManageBook = () => {
           </table>
         </div>
 
-        {/* Empty State Inside Table */}
         {books.length === 0 && (
           <div className="text-center py-32 bg-white dark:bg-slate-900">
             <p className="text-slate-400 dark:text-slate-500 font-black uppercase tracking-widest text-xs">

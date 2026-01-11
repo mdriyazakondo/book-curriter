@@ -64,8 +64,7 @@ const OrderModal = ({ isOpen, closeModal, orderPayment, refetch }) => {
 
   return (
     <Transition show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-[999]" onClose={closeModal}>
-        {/* Backdrop Animation */}
+      <Dialog as="div" className="relative z-999" onClose={closeModal}>
         <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"

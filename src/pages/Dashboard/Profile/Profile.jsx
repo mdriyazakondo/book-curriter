@@ -104,9 +104,7 @@ const Profile = () => {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      {/* Profile Card */}
-      <div className="bg-white dark:bg-slate-900 rounded-[32px] shadow-xl shadow-slate-200/60 dark:shadow-none border border-slate-100 dark:border-slate-800 overflow-hidden">
-        {/* Banner Section */}
+      <div className="bg-white dark:bg-slate-900 rounded-4xl shadow-xl shadow-slate-200/60 dark:shadow-none border border-slate-100 dark:border-slate-800 overflow-hidden">
         <div className="h-32 bg-slate-900 dark:bg-emerald-600/20 w-full relative">
           <div className="absolute -bottom-12 left-8">
             <img
@@ -117,7 +115,6 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Info Section */}
         <div className="pt-16 pb-8 px-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
@@ -144,7 +141,6 @@ const Profile = () => {
             )}
           </div>
 
-          {/* Activity Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 pt-8 border-t border-slate-50 dark:border-slate-800">
             <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-transparent dark:border-slate-800">
               <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
@@ -170,9 +166,8 @@ const Profile = () => {
         </div>
       </div>
 
-      {/* Update Form Section */}
       {isProfile && (
-        <div className="bg-white dark:bg-slate-900 p-8 rounded-[32px] shadow-xl shadow-slate-200/60 dark:shadow-none border border-slate-100 dark:border-slate-800 animate-in slide-in-from-bottom-4 duration-300">
+        <div className="bg-white dark:bg-slate-900 p-8 rounded-4xl shadow-xl shadow-slate-200/60 dark:shadow-none border border-slate-100 dark:border-slate-800 animate-in slide-in-from-bottom-4 duration-300">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-black text-slate-900 dark:text-white">
               Update Information
@@ -189,7 +184,6 @@ const Profile = () => {
             onSubmit={handleSubmit(handleProfileUpdate)}
             className="space-y-5"
           >
-            {/* Name Input */}
             <div className="flex flex-col">
               <label
                 htmlFor="name"
@@ -209,7 +203,6 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Photo Input */}
             <div className="flex flex-col">
               <label
                 htmlFor="photo"

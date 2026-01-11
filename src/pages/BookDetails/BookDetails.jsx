@@ -94,7 +94,6 @@ const BookDetails = () => {
       <div className="max-w-7xl mx-auto">
         <div className="bg-white dark:bg-slate-900 rounded-[48px] shadow-2xl shadow-slate-200/50 dark:shadow-none overflow-hidden border border-slate-100 dark:border-slate-800">
           <div className="grid grid-cols-1 lg:grid-cols-12">
-            {/* Left Side: Product Showcase */}
             <div className="lg:col-span-5 bg-slate-100 dark:bg-slate-800/50 flex items-center justify-center p-10 md:p-20 relative overflow-hidden">
               <div className="absolute top-[-10%] left-[-10%] w-64 h-64 bg-emerald-500/20 blur-[100px] rounded-full"></div>
               <div className="absolute bottom-[-10%] right-[-10%] w-64 h-64 bg-blue-500/10 blur-[100px] rounded-full"></div>
@@ -106,7 +105,6 @@ const BookDetails = () => {
               />
             </div>
 
-            {/* Right Side: Details */}
             <div className="lg:col-span-7 p-8 md:p-16 flex flex-col justify-center">
               <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-black text-[10px] uppercase tracking-[4px] mb-6">
                 <FaFeatherAlt /> Premium Edition
@@ -130,7 +128,6 @@ const BookDetails = () => {
                 </span>
               </div>
 
-              {/* Specs Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 py-10 border-y border-slate-100 dark:border-slate-800">
                 <SpecItem icon={<FaLayerGroup />} label="Genre" value={genre} />
                 <SpecItem
@@ -156,7 +153,6 @@ const BookDetails = () => {
                 <SpecItem icon={<FaHashtag />} label="Format" value={format} />
               </div>
 
-              {/* Description Section */}
               <div className="mt-10">
                 <h3 className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">
                   Synopsis
@@ -166,7 +162,6 @@ const BookDetails = () => {
                 </p>
               </div>
 
-              {/* Pricing & Checkout */}
               <div className="flex flex-col sm:flex-row items-center justify-between mt-12 gap-8">
                 <div className="flex flex-col">
                   <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
@@ -207,7 +202,6 @@ const BookDetails = () => {
           </div>
         </div>
 
-        {/* Rating Section */}
         <div className="mt-16">
           <BookRating book={book} />
         </div>

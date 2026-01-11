@@ -57,9 +57,7 @@ const HeroSection = () => {
       >
         {staticSliders.map((slide) => (
           <SwiperSlide key={slide._id}>
-            {/* Dark mode background change: from-white to dark:from-slate-900 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-950 p-8 md:p-16 lg:p-20 min-h-[500px] transition-colors duration-300">
-              {/* Text Content */}
               <div className="flex flex-col justify-center items-center md:items-start space-y-6 text-center md:text-left order-2 md:order-1">
                 <div className="inline-block px-4 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-widest">
                   Featured Release
@@ -95,9 +93,7 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              {/* Image Content */}
               <div className="flex justify-center relative order-1 md:order-2">
-                {/* Decorative Blur Circle */}
                 <div className="absolute inset-0 bg-emerald-100 dark:bg-emerald-600 rounded-full blur-3xl opacity-30 dark:opacity-10 scale-75"></div>
 
                 <div className="relative z-10 group">
@@ -107,7 +103,6 @@ const HeroSection = () => {
                     className="h-[300px] md:h-[450px] w-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)] group-hover:scale-105 transition-transform duration-500"
                   />
 
-                  {/* Discount Badge */}
                   <div className="absolute -top-4 -right-4 bg-white dark:bg-slate-800 p-4 rounded-xl shadow-xl border border-slate-50 dark:border-slate-700 animate-bounce">
                     <p className="text-emerald-600 dark:text-emerald-400 font-black text-xl leading-none">
                       20%
@@ -123,7 +118,6 @@ const HeroSection = () => {
         ))}
       </Swiper>
 
-      {/* Custom Styles for Swiper - Adding Dark Mode Support for Navigation */}
       <style jsx global>{`
         .swiper-pagination-bullet-active {
           background: #059669 !important;

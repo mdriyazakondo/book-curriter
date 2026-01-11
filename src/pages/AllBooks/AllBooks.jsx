@@ -43,7 +43,6 @@ const AllBooks = () => {
     <div className="bg-slate-50/50 dark:bg-slate-950 min-h-screen pb-20 pt-10 transition-colors duration-300">
       <Container>
         <div className="mb-12">
-          {/* Header */}
           <div className="text-center mb-10">
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
               Explore Our <span className="text-emerald-600">Collection</span>
@@ -53,9 +52,7 @@ const AllBooks = () => {
             </p>
           </div>
 
-          {/* Search and Sort Controls */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-white dark:bg-slate-900 p-6 rounded-[32px] shadow-sm border border-slate-100 dark:border-slate-800">
-            {/* Search Input */}
             <div className="relative w-full md:w-1/2 group">
               <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 dark:text-slate-600 group-focus-within:text-emerald-500 transition-colors" />
               <input
@@ -67,7 +64,6 @@ const AllBooks = () => {
               />
             </div>
 
-            {/* Sort Dropdown */}
             <div className="relative w-full md:w-60">
               <FaSortAmountDown className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 pointer-events-none" />
               <select
@@ -92,7 +88,6 @@ const AllBooks = () => {
           </div>
         </div>
 
-        {/* Results Grid */}
         {currentBooks.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {currentBooks.map((latest) => (
@@ -113,7 +108,6 @@ const AllBooks = () => {
           </div>
         )}
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex justify-center items-center gap-2 mt-16">
             <button

@@ -12,7 +12,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { user, logoutUserFunc, loading } = useAuth();
 
-  // --- Dark Mode Logic ---
   const [isDark, setIsDark] = useState(
     localStorage.getItem("theme") === "dark" ||
       (!("theme" in localStorage) &&
@@ -31,7 +30,6 @@ const Navbar = () => {
 
   const toggleTheme = () => setIsDark(!isDark);
 
-  // --- Styles ---
   const isActive = (path) =>
     location.pathname === path
       ? "text-emerald-600 border-b-2 border-emerald-600"
@@ -55,23 +53,19 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="sticky top-0 left-0 right-0 z-[9999] bg-white/90 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 shadow-sm transition-all duration-300">
+    <nav className="sticky top-0 left-0 right-0 z-9999 bg-white/90 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 shadow-sm transition-all duration-300">
       <div className="max-w-[1500px] mx-auto px-4 flex items-center justify-between h-16">
-        {/* Logo Section */}
         <div className="flex items-center gap-4">
           <div className="hover:scale-105 transition-transform duration-300">
             <Logo />
           </div>
         </div>
 
-        {/* Desktop Links */}
         <div className="hidden lg:flex items-center">
           <ul className="flex items-center gap-2">{links}</ul>
         </div>
 
-        {/* Action Buttons */}
         <div className="flex items-center gap-2 md:gap-4">
-          {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-yellow-400 transition-colors"
@@ -96,7 +90,6 @@ const Navbar = () => {
                 </p>
               </div>
 
-              {/* Profile Image (Basic Tailwind dropdown logic could be added here) */}
               <div className="relative group">
                 <button className="w-10 h-10 rounded-full border-2 border-emerald-100 dark:border-emerald-900 overflow-hidden shadow-inner">
                   <img
@@ -105,7 +98,6 @@ const Navbar = () => {
                     className="w-full h-full object-cover"
                   />
                 </button>
-                {/* Simple Hover Dropdown */}
                 <div className="absolute right-0 top-full mt-2 w-40 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <button
                     onClick={logoutUserFunc}

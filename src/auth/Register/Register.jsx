@@ -79,7 +79,7 @@ const Register = () => {
         </div>
 
         <form onSubmit={handleSubmit(handleRegister)} className="space-y-5">
-          {/* Full Name */}
+       
           <div className="flex flex-col">
             <label className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1">
               Full Name
@@ -106,7 +106,7 @@ const Register = () => {
             )}
           </div>
 
-          {/* Photo Upload */}
+        
           <div className="flex flex-col">
             <label className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1">
               Profile Photo
@@ -132,7 +132,7 @@ const Register = () => {
             )}
           </div>
 
-          {/* Email */}
+      
           <div className="flex flex-col">
             <label className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1">
               Email Address
@@ -159,7 +159,7 @@ const Register = () => {
             )}
           </div>
 
-          {/* Password */}
+      
           <div className="flex flex-col">
             <label className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1">
               Security Password

@@ -54,7 +54,6 @@ export default function ServicesSection() {
     <div className="bg-slate-50/50 dark:bg-slate-900/20 py-16 transition-colors duration-300">
       <Container>
         <section>
-          {/* Header Section */}
           <div className="text-center mb-16">
             <div className="inline-block px-4 py-1.5 mb-4 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-widest">
               Premium Solutions
@@ -69,7 +68,6 @@ export default function ServicesSection() {
             </p>
           </div>
 
-          {/* Services Grid */}
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => {
               const Icon = s.icon;
@@ -78,7 +76,6 @@ export default function ServicesSection() {
                   key={s.id}
                   className="group relative bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-8 rounded-3xl shadow-sm hover:shadow-2xl hover:shadow-emerald-100/50 dark:hover:shadow-emerald-900/20 hover:-translate-y-2 transition-all duration-500 flex flex-col items-start"
                 >
-                  {/* Icon Container */}
                   <div className="mb-6 w-14 h-14 rounded-2xl bg-slate-900 dark:bg-slate-700 flex items-center justify-center group-hover:bg-emerald-600 transition-colors duration-500 shadow-lg dark:shadow-none">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
@@ -92,7 +89,6 @@ export default function ServicesSection() {
                     </p>
                   </div>
 
-                  {/* Action Button */}
                   <button
                     aria-label={`Learn More — ${s.title}`}
                     className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-tighter text-slate-900 dark:text-slate-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-all"

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router";
-import { FiHome, FiMenu, FiSun, FiMoon } from "react-icons/fi"; // Sun, Moon icon add kora hoyeche
+import { FiHome, FiMenu, FiSun, FiMoon } from "react-icons/fi";
 import { MdDashboard, MdLogout } from "react-icons/md";
 import { FaHeartPulse, FaRegCircleUser } from "react-icons/fa6";
 import Swal from "sweetalert2";
@@ -18,7 +18,6 @@ const DashboardLayout = () => {
   const navigate = useNavigate();
   const [role] = useRole();
 
-  // --- Dark Mode Logic Start ---
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("theme") === "dark"
   );
@@ -32,7 +31,6 @@ const DashboardLayout = () => {
       localStorage.setItem("theme", "light");
     }
   }, [isDarkMode]);
-  // --- Dark Mode Logic End ---
 
   const isActive = (path) =>
     pathname === path
@@ -99,7 +97,6 @@ const DashboardLayout = () => {
             </div>
 
             <div className="flex-none gap-4 flex items-center">
-              {/* --- Theme Toggle Button --- */}
               <button
                 onClick={() => setIsDarkMode(!isDarkMode)}
                 className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 hover:ring-2 ring-emerald-100 dark:ring-slate-700 transition-all"

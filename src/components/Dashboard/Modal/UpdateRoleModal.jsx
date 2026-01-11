@@ -13,7 +13,6 @@ const UpdateRoleModal = ({ isOpen, closeModal, user, refetch }) => {
   const [updatedRole, setUpdatedRole] = useState(user?.role);
   const axiosSecure = useAxiosSecure();
 
-  // ইউজার পরিবর্তন হলে যেন ড্রপডাউন ভ্যালু আপডেট হয়
   useEffect(() => {
     if (user?.role) setUpdatedRole(user.role);
   }, [user]);
@@ -51,8 +50,7 @@ const UpdateRoleModal = ({ isOpen, closeModal, user, refetch }) => {
 
   return (
     <Transition grow show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-[100]" onClose={closeModal}>
-        {/* Overlay with glassmorphism */}
+      <Dialog as="div" className="relative z-100" onClose={closeModal}>
         <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"

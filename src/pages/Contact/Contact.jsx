@@ -10,15 +10,12 @@ import {
 const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Logic for sending message
   };
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4 md:p-10 animate-in fade-in duration-1000 transition-colors">
       <div className="bg-white dark:bg-slate-900 shadow-[0_32px_64px_-15px_rgba(0,0,0,0.05)] dark:shadow-2xl rounded-[40px] max-w-5xl w-full overflow-hidden flex flex-col lg:flex-row border border-slate-100 dark:border-slate-800">
-        {/* Left Side: Contact Information */}
         <div className="lg:w-2/5 bg-slate-900 dark:bg-slate-800/50 p-10 md:p-12 text-white flex flex-col justify-between relative overflow-hidden">
-          {/* Decorative Background Circles */}
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
 
@@ -36,7 +33,6 @@ const Contact = () => {
             </p>
 
             <div className="space-y-8">
-              {/* Contact Item */}
               <div className="flex items-start gap-5">
                 <div className="bg-slate-800 dark:bg-slate-700/50 p-4 rounded-2xl text-emerald-400">
                   <FiMail size={24} />
@@ -84,11 +80,9 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Right Side: Contact Form */}
         <div className="lg:w-3/5 p-10 md:p-16 bg-white dark:bg-slate-900">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Name Field */}
               <div className="space-y-2">
                 <label className="text-[11px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">
                   Full Name
@@ -100,7 +94,7 @@ const Contact = () => {
                   required
                 />
               </div>
-              {/* Email Field */}
+
               <div className="space-y-2">
                 <label className="text-[11px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">
                   Email Address
@@ -117,7 +111,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Subject Field */}
             <div className="space-y-2">
               <label className="text-[11px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">
                 Subject
@@ -129,7 +122,6 @@ const Contact = () => {
               />
             </div>
 
-            {/* Message Field */}
             <div className="space-y-2">
               <label className="text-[11px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">
                 Your Message
@@ -142,7 +134,6 @@ const Contact = () => {
               ></textarea>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               className="w-full flex items-center justify-center gap-3 bg-emerald-600 hover:bg-slate-900 dark:hover:bg-emerald-500 text-white font-black uppercase tracking-[2px] py-5 rounded-2xl transition-all shadow-lg shadow-emerald-100 dark:shadow-none active:scale-95 group"

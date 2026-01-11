@@ -8,7 +8,6 @@ const UserDataRow = ({ users, refetch }) => {
 
   return (
     <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors group">
-      {/* Profile Image */}
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex justify-center">
           <img
@@ -19,21 +18,18 @@ const UserDataRow = ({ users, refetch }) => {
         </div>
       </td>
 
-      {/* Name */}
       <td className="px-6 py-4 whitespace-nowrap">
         <p className="text-sm font-bold text-slate-700 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
           {users?.name}
         </p>
       </td>
 
-      {/* Email */}
       <td className="px-6 py-4 whitespace-nowrap">
         <p className="text-sm text-slate-500 dark:text-slate-400 font-medium lowercase">
           {users?.email}
         </p>
       </td>
 
-      {/* Role Badge */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
         <span
           className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
@@ -48,7 +44,6 @@ const UserDataRow = ({ users, refetch }) => {
         </span>
       </td>
 
-      {/* Last Login Time */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
         <p className="text-xs text-slate-500 dark:text-slate-300 font-bold">
           {new Date(users?.last_loggedIn).toLocaleDateString("en-GB", {
@@ -65,7 +60,6 @@ const UserDataRow = ({ users, refetch }) => {
         </p>
       </td>
 
-      {/* Action Button */}
       <td className="px-6 py-4 whitespace-nowrap text-right">
         <button
           onClick={() => setIsOpen(true)}

@@ -18,7 +18,6 @@ const ForgetPassword = () => {
   const onSubmit = async (data) => {
     try {
       await sendPasswordResetEmail(auth, data.email);
-      // Success message sweetalert diyeo dekhate paren, ekhane reset logic rakha holo
       reset();
     } catch (err) {
       console.log(err.message);

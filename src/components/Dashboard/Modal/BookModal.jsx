@@ -29,8 +29,8 @@ const BookModal = ({ isOpen, closeModal, bookId, refetch }) => {
       text: `Change visibility to ${updatedStatus}?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#10b981", // Emerald 600
-      cancelButtonColor: "#f43f5e", // Rose 500
+      confirmButtonColor: "#10b981",
+      cancelButtonColor: "#f43f5e",
       confirmButtonText: "Yes, Update Status",
     });
 
@@ -65,7 +65,6 @@ const BookModal = ({ isOpen, closeModal, bookId, refetch }) => {
   return (
     <Transition show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-[100]" onClose={closeModal}>
-        {/* Backdrop overlay */}
         <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"
@@ -90,7 +89,6 @@ const BookModal = ({ isOpen, closeModal, bookId, refetch }) => {
               leaveTo="opacity-0 scale-95"
             >
               <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-[32px] bg-white p-8 shadow-2xl transition-all border border-slate-100">
-                {/* Modal Header Icon */}
                 <div className="flex flex-col items-center text-center">
                   <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-4 transform rotate-3">
                     <FaBookReader size={28} />
@@ -103,7 +101,6 @@ const BookModal = ({ isOpen, closeModal, bookId, refetch }) => {
                   </p>
                 </div>
 
-                {/* Input Section */}
                 <div className="mt-8">
                   <label className="text-[10px] font-black uppercase tracking-[2px] text-slate-400 ml-1 mb-2 block">
                     Choose New Status
@@ -119,7 +116,6 @@ const BookModal = ({ isOpen, closeModal, bookId, refetch }) => {
                   </select>
                 </div>
 
-                {/* Buttons */}
                 <div className="mt-10 flex flex-col gap-3">
                   <button
                     onClick={handleUpdate}

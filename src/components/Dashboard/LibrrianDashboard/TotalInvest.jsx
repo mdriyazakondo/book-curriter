@@ -17,12 +17,10 @@ const TotalInvest = () => {
     enabled: !!user?.email,
   });
 
-  // Sync loading state safely
   useEffect(() => {
     setIsLoadingLibrean(isLoading);
   }, [isLoading, setIsLoadingLibrean]);
 
-  // Total investment calculation
   const totalSpent = orders.reduce(
     (acc, curr) => acc + (parseFloat(curr.price) || 0),
     0
@@ -32,12 +30,10 @@ const TotalInvest = () => {
 
   return (
     <div className="bg-white dark:bg-slate-900 p-6 rounded-[24px] border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-5 group hover:shadow-md dark:hover:shadow-blue-900/10 hover:border-blue-200 dark:hover:border-blue-500/30 transition-all duration-300">
-      {/* Icon Section - Blue Theme for Investment */}
       <div className="bg-blue-50 dark:bg-blue-500/10 w-14 h-14 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 dark:group-hover:bg-blue-500 group-hover:text-white dark:group-hover:text-white transition-colors duration-300 shadow-sm">
         <FaWallet size={24} />
       </div>
 
-      {/* Text Section */}
       <div>
         <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">
           Total Investment

@@ -12,17 +12,10 @@ import ManagementCard from "../LibrrianDashboard/ManagementCard";
 import TotalOrder from "../LibrrianDashboard/TotalOrder";
 import TotalInvest from "../LibrrianDashboard/TotalInvest";
 import TotalBook from "../LibrrianDashboard/TotalBook";
-import useAuth from "../../../hooks/useAuth";
-import Loading from "../../../shared/Loading/Loading";
 
 const LibrarianDashboard = () => {
-  const { setIsLoadingLibrean } = useAuth();
-
-  // if (setIsLoadingLibrean) return <Loading />;
-
   return (
     <div className="min-h-screen animate-in fade-in duration-700 pb-10 transition-colors duration-300">
-      {/* Header Section */}
       <div className="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">
@@ -40,7 +33,6 @@ const LibrarianDashboard = () => {
         </Link>
       </div>
 
-      {/* Stats Cards Section */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6 mb-10">
         <TotalBook />
         <TotalOrder />
@@ -68,7 +60,6 @@ const LibrarianDashboard = () => {
             />
           </div>
 
-          {/* Analytics Section */}
           <div className="bg-white dark:bg-slate-900 p-8 rounded-[40px] border border-slate-100 dark:border-slate-800 shadow-sm">
             <div className="flex items-center justify-between mb-6">
               <h4 className="font-black text-slate-900 dark:text-slate-100 flex items-center gap-2">
@@ -83,13 +74,11 @@ const LibrarianDashboard = () => {
           </div>
         </div>
 
-        {/* Sidebar Actions */}
         <div className="space-y-6">
           <h3 className="text-xl font-black text-slate-900 dark:text-slate-100 px-2">
             Quick Access
           </h3>
 
-          {/* Audit Alert Card */}
           <div className="bg-slate-900 dark:bg-emerald-950/30 rounded-[40px] p-8 text-white relative overflow-hidden border border-transparent dark:border-emerald-900/30">
             <div className="relative z-10">
               <p className="text-emerald-400 text-[10px] font-black uppercase tracking-[3px] mb-4">
@@ -112,7 +101,6 @@ const LibrarianDashboard = () => {
             </div>
           </div>
 
-          {/* Help Manual Card */}
           <div className="bg-emerald-50 dark:bg-slate-900 rounded-[40px] p-8 border border-emerald-100 dark:border-slate-800 transition-all">
             <h4 className="font-black text-emerald-900 dark:text-emerald-500 mb-2">
               Need Help?

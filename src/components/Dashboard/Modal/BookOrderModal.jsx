@@ -79,7 +79,7 @@ const BookOrderModal = ({ isOpen, closeModal, book }) => {
               showConfirmButton: false,
             });
             closeModal();
-            // পেমেন্ট গেটওয়ের URL এখানে হ্যান্ডেল করুন
+
             if (res.data.url) {
               window.location.replace(res.data.url);
             } else {
@@ -130,7 +130,6 @@ const BookOrderModal = ({ isOpen, closeModal, book }) => {
                   Check your delivery details below.
                 </p>
 
-                {/* Book Summary Card */}
                 <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl mb-6 border border-slate-100 dark:border-slate-700">
                   <img
                     src={book?.image}
@@ -226,7 +225,7 @@ const BookOrderModal = ({ isOpen, closeModal, book }) => {
                     </button>
                     <button
                       type="submit"
-                      className="flex-[2] px-6 py-4 text-xs font-black uppercase tracking-widest text-white bg-slate-900 dark:bg-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-500 rounded-2xl transition-all shadow-xl shadow-slate-200 dark:shadow-none active:scale-95"
+                      className="flex-2 px-6 py-4 text-xs font-black uppercase tracking-widest text-white bg-slate-900 dark:bg-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-500 rounded-2xl transition-all shadow-xl shadow-slate-200 dark:shadow-none active:scale-95"
                     >
                       Confirm & Pay
                     </button>

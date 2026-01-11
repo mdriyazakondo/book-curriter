@@ -49,7 +49,6 @@ const Coverage = () => {
         </div>
 
         <div className="relative group">
-          {/* Decorative Glow - Adjusted for Dark Mode */}
           <div className="absolute -inset-4 bg-emerald-100/50 dark:bg-emerald-600/10 rounded-[40px] blur-2xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
 
           <div className="relative h-[500px] w-full rounded-3xl md:rounded-[40px] overflow-hidden border-8 border-slate-50 dark:border-slate-800 shadow-2xl z-10">
@@ -81,7 +80,6 @@ const Coverage = () => {
           </div>
         </div>
 
-        {/* District Tags */}
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           {rangpurDistricts.map((d, idx) => (
             <span
@@ -94,7 +92,6 @@ const Coverage = () => {
         </div>
       </Container>
 
-      {/* Global CSS for Leaflet Dark Mode */}
       <style jsx global>{`
         /* Dark Mode Map Filter */
         .dark .map-container .leaflet-tile-container {

@@ -74,7 +74,6 @@ const WishList = () => {
 
   return (
     <div className="animate-in fade-in duration-700 pb-10">
-      {/* Header Section */}
       <div className="mb-10 text-left">
         <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-black text-[10px] uppercase tracking-[3px] mb-2">
           <FaHeart className="animate-pulse" /> Curated Collection
@@ -90,8 +89,7 @@ const WishList = () => {
         </p>
       </div>
 
-      {/* Table Section */}
-      <div className="bg-white dark:bg-slate-900 rounded-[32px] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden transition-all">
+      <div className="bg-white dark:bg-slate-900 rounded-4xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden transition-all">
         <div className="overflow-x-auto">
           <table className="min-w-full leading-normal">
             <thead>

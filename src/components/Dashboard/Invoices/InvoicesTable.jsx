@@ -30,14 +30,12 @@ const InvoicesTable = ({ order }) => {
 
   return (
     <tr className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-all duration-300 border-b border-slate-50 dark:border-slate-800 last:border-0">
-      {/* Book Name */}
       <td className="py-5 px-6">
         <p className="text-sm font-bold text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
           {bookName}
         </p>
       </td>
 
-      {/* Customer Info */}
       <td className="py-5 px-6 text-center">
         <div className="flex flex-col items-center">
           <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
@@ -49,7 +47,6 @@ const InvoicesTable = ({ order }) => {
         </div>
       </td>
 
-      {/* Transaction ID with Copy Button */}
       <td className="py-5 px-6 text-center">
         <div className="inline-flex items-center gap-2 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
           <code className="text-[11px] font-mono font-bold text-slate-600 dark:text-slate-400">
@@ -65,7 +62,6 @@ const InvoicesTable = ({ order }) => {
         </div>
       </td>
 
-      {/* Status Badge */}
       <td className="py-5 px-6 text-center">
         <span
           className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
@@ -78,12 +74,10 @@ const InvoicesTable = ({ order }) => {
         </span>
       </td>
 
-      {/* Price */}
       <td className="py-5 px-6 text-center font-black text-slate-900 dark:text-white">
         ${parseFloat(price).toFixed(2)}
       </td>
 
-      {/* Payment Date */}
       <td className="py-5 px-6 text-center">
         <div className="flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400">
           <FaCalendarCheck
@@ -100,7 +94,6 @@ const InvoicesTable = ({ order }) => {
         </div>
       </td>
 
-      {/* Invoice Download Action */}
       <td className="py-5 px-6 text-center">
         <button
           className="p-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 rounded-xl hover:bg-slate-900 dark:hover:bg-emerald-600 hover:text-white dark:hover:text-white hover:border-slate-900 dark:hover:border-emerald-600 transition-all shadow-sm active:scale-95 group/btn"

@@ -6,7 +6,6 @@ const BookCard = ({ latest }) => {
 
   return (
     <div className="group bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl shadow-sm hover:shadow-xl dark:shadow-slate-900/50 transition-all duration-300 overflow-hidden flex flex-col h-full">
-      {/* Image Section */}
       <div className="relative overflow-hidden h-64 bg-slate-50 dark:bg-slate-900/50">
         <img
           src={image}
@@ -14,14 +13,12 @@ const BookCard = ({ latest }) => {
           className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110"
         />
 
-        {/* Genre Badge */}
         <div className="absolute top-3 left-3">
           <span className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md text-slate-700 dark:text-slate-200 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm border border-slate-100 dark:border-slate-700">
             {genre}
           </span>
         </div>
 
-        {/* Status Badge */}
         <div className="absolute top-3 right-3">
           <span
             className={`px-3 py-1 text-[10px] font-bold uppercase rounded-full shadow-sm ${
@@ -35,7 +32,6 @@ const BookCard = ({ latest }) => {
         </div>
       </div>
 
-      {/* Content Section */}
       <div className="p-5 flex flex-col grow">
         <h2 className="text-lg font-black text-slate-900 dark:text-white line-clamp-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
           {bookName}

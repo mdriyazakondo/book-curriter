@@ -18,21 +18,18 @@ const TotalBook = () => {
     enabled: !!user?.email,
   });
 
-  // Loading state handling update
   useEffect(() => {
     setIsLoadingLibrean(isLoading);
   }, [isLoading, setIsLoadingLibrean]);
 
-  if (isLoading) return null; // Parent handle korbe loading
+  if (isLoading) return null;
 
   return (
-    <div className="bg-white dark:bg-slate-900 p-6 rounded-[24px] border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-5 group hover:shadow-md dark:hover:shadow-indigo-900/10 hover:border-indigo-200 dark:hover:border-indigo-500/30 transition-all duration-300">
-      {/* Icon Section - Indigo theme */}
+    <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-5 group hover:shadow-md dark:hover:shadow-indigo-900/10 hover:border-indigo-200 dark:hover:border-indigo-500/30 transition-all duration-300">
       <div className="bg-indigo-50 dark:bg-indigo-500/10 w-14 h-14 rounded-2xl flex items-center justify-center text-indigo-600 dark:text-indigo-400 group-hover:bg-indigo-600 dark:group-hover:bg-indigo-500 group-hover:text-white dark:group-hover:text-white transition-colors duration-300 shadow-sm">
         <FaBookOpen size={22} />
       </div>
 
-      {/* Text Section */}
       <div>
         <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">
           Total Books

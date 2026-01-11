@@ -17,7 +17,6 @@ const ReviewCard = ({ review }) => {
     day: "numeric",
   });
 
-  // Emerald colored stars
   const stars = Array.from({ length: 5 }, (_, i) => (
     <FaStar
       key={i}
@@ -30,8 +29,7 @@ const ReviewCard = ({ review }) => {
   ));
 
   return (
-    <div className="max-w-md mx-auto bg-white dark:bg-slate-900 rounded-[32px] p-8 shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-xl dark:hover:shadow-emerald-900/10 transition-all duration-300 group">
-      {/* Top Section: Quote & Stars */}
+    <div className="max-w-md mx-auto bg-white dark:bg-slate-900 rounded-4xl p-8 shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-xl dark:hover:shadow-emerald-900/10 transition-all duration-300 group">
       <div className="flex justify-between items-start mb-6">
         <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-500/10 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:bg-emerald-600 group-hover:rotate-12">
           <FaQuoteLeft className="text-emerald-600 dark:text-emerald-400 text-xl transition-colors group-hover:text-white" />
@@ -44,7 +42,6 @@ const ReviewCard = ({ review }) => {
         </div>
       </div>
 
-      {/* Review Text */}
       <p className="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed italic mb-8 min-h-[80px]">
         "
         {reviewText?.length > 150
@@ -53,10 +50,8 @@ const ReviewCard = ({ review }) => {
         "
       </p>
 
-      {/* Bottom Profile Section */}
       <div className="flex items-center gap-4 pt-6 border-t border-slate-50 dark:border-slate-800/60">
         <div className="relative">
-          {/* Avatar Glow */}
           <div className="absolute -inset-1 bg-emerald-500 rounded-full blur opacity-0 group-hover:opacity-20 dark:group-hover:opacity-40 transition-opacity duration-500"></div>
           <img
             className="relative w-12 h-12 rounded-full object-cover border-2 border-white dark:border-slate-800 shadow-sm"

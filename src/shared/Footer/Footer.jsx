@@ -14,7 +14,6 @@ const Footer = () => {
     <footer className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-300 pt-16 pb-10 border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-          {/* Logo + About */}
           <div className="space-y-6">
             <h2 className="text-2xl font-black tracking-tighter leading-none italic text-slate-900 dark:text-white">
               Book <span className="text-emerald-600">Currier</span>
@@ -42,7 +41,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Navigation */}
           <div>
             <h3 className="text-slate-900 dark:text-white font-black uppercase tracking-widest text-xs mb-8 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
@@ -67,7 +65,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Support */}
           <div>
             <h3 className="text-slate-900 dark:text-white font-black uppercase tracking-widest text-xs mb-8 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
@@ -87,7 +84,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Newsletter */}
           <div>
             <h3 className="text-slate-900 dark:text-white font-black uppercase tracking-widest text-xs mb-8 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
@@ -109,7 +105,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-slate-200 dark:border-slate-900 mt-20 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] font-black uppercase tracking-[2px] text-slate-400 dark:text-slate-500">
           <p>© {currentYear} BookCurrier. All rights reserved.</p>
           <div className="flex gap-8">

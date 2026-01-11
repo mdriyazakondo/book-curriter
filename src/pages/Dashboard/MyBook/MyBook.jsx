@@ -31,7 +31,7 @@ const MyBook = () => {
       cancelButtonColor: "#f43f5e",
       confirmButtonText: "Yes, delete it!",
       customClass: {
-        popup: "rounded-[24px] dark:bg-slate-800 dark:text-white", // Swal Dark support
+        popup: "rounded-[24px] dark:bg-slate-800 dark:text-white",
       },
     });
 
@@ -69,11 +69,10 @@ const MyBook = () => {
 
   return (
     <div className="animate-in fade-in duration-700">
-      {/* Header Section */}
       <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h2 className="text-3xl font-black text-slate-900 dark:text-white">
-            My{" "}
+            My
             <span className="text-emerald-600 dark:text-emerald-400">
               Library
             </span>
@@ -89,8 +88,7 @@ const MyBook = () => {
         </div>
       </div>
 
-      {/* Table Section */}
-      <div className="bg-white dark:bg-slate-900 rounded-[32px] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-4xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full leading-normal">
             <thead>
@@ -135,7 +133,6 @@ const MyBook = () => {
         </div>
       </div>
 
-      {/* Empty State */}
       {books.length === 0 && (
         <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-[32px] mt-6 border border-dashed border-slate-200 dark:border-slate-800">
           <div className="text-slate-300 dark:text-slate-700 text-5xl mb-4 flex justify-center">

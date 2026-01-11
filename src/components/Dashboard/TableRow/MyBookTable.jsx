@@ -12,7 +12,6 @@ const MyBookTable = ({ book, handleDelete, refetch }) => {
 
   return (
     <tr className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors group border-b border-slate-50 dark:border-slate-800 last:border-0">
-      {/* Book Cover */}
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="flex justify-center">
           <img
@@ -23,21 +22,18 @@ const MyBookTable = ({ book, handleDelete, refetch }) => {
         </div>
       </td>
 
-      {/* Book Name */}
       <td className="px-6 py-4 whitespace-nowrap">
         <p className="text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
           {bookName}
         </p>
       </td>
 
-      {/* Author Name */}
       <td className="px-6 py-4 whitespace-nowrap">
         <p className="text-sm text-slate-500 dark:text-slate-400 font-medium italic">
           {authorName}
         </p>
       </td>
 
-      {/* Date */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
         <p className="text-xs text-slate-400 dark:text-slate-500 font-bold uppercase tracking-tighter">
           {new Date(create_date).toLocaleDateString("en-GB", {
@@ -48,21 +44,18 @@ const MyBookTable = ({ book, handleDelete, refetch }) => {
         </p>
       </td>
 
-      {/* Price */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
         <p className="text-sm font-black text-emerald-600 dark:text-emerald-400">
           ${price}
         </p>
       </td>
 
-      {/* Language */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
         <span className="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold rounded uppercase tracking-wider">
           {language}
         </span>
       </td>
 
-      {/* Status Button/Badge */}
       <td className="px-6 py-4 whitespace-nowrap text-center">
         <button
           onClick={() => setIsOpen(true)}
@@ -83,10 +76,8 @@ const MyBookTable = ({ book, handleDelete, refetch }) => {
         />
       </td>
 
-      {/* Actions */}
       <td className="px-6 py-4 whitespace-nowrap text-right">
         <div className="flex items-center justify-end gap-2">
-          {/* Edit Button */}
           <Link
             to={`/dashboard/update-book/${book._id}`}
             className="p-2.5 bg-white dark:bg-slate-800 hover:bg-slate-900 dark:hover:bg-emerald-500 text-slate-600 dark:text-slate-400 hover:text-white dark:hover:text-white border border-slate-200 dark:border-slate-700 rounded-xl transition-all duration-300 shadow-sm"
@@ -95,7 +86,6 @@ const MyBookTable = ({ book, handleDelete, refetch }) => {
             <FaEdit size={14} />
           </Link>
 
-          {/* Delete Button */}
           <button
             disabled={status === "published"}
             onClick={() => handleDelete(book._id)}
