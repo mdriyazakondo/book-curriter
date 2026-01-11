@@ -222,14 +222,14 @@ const AddBook = () => {
               {...register("description", { required: true })}
               rows="4"
               placeholder="Write a brief summary of the book..."
-              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-[24px] px-5 py-4 text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all placeholder:text-slate-300 dark:placeholder:text-slate-600"
+              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-3xl px-5 py-4 text-sm font-medium focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all placeholder:text-slate-300 dark:placeholder:text-slate-600"
             />
           </div>
 
           <div className="md:col-span-2 pt-4">
             <button
               type="submit"
-              className="w-full bg-emerald-600 hover:bg-slate-900 dark:hover:bg-emerald-500 text-white font-black uppercase tracking-[3px] py-5 rounded-[24px] shadow-lg shadow-emerald-100 dark:shadow-none transition-all duration-300 active:scale-[0.98]"
+              className="w-full bg-emerald-600 hover:bg-slate-900 dark:hover:bg-emerald-500 text-white font-black uppercase tracking-[3px] py-5 rounded-3xl shadow-lg shadow-emerald-100 dark:shadow-none transition-all duration-300 active:scale-[0.98]"
             >
               Confirm & Add Book
             </button>

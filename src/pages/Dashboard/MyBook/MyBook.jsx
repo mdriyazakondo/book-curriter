@@ -134,7 +134,7 @@ const MyBook = () => {
       </div>
 
       {books.length === 0 && (
-        <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-[32px] mt-6 border border-dashed border-slate-200 dark:border-slate-800">
+        <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-4xl mt-6 border border-dashed border-slate-200 dark:border-slate-800">
           <div className="text-slate-300 dark:text-slate-700 text-5xl mb-4 flex justify-center">
             📚
           </div>
