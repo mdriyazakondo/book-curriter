@@ -11,9 +11,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-300 pt-16 pb-10 border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
+    <footer className="bg-slate-50 px-6 dark:bg-slate-950 text-slate-600 dark:text-slate-300  pt-16 lg:px-0 pb-10 border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 ">
           <div className="space-y-6">
             <h2 className="text-2xl font-black tracking-tighter leading-none italic text-slate-900 dark:text-white">
               Book <span className="text-emerald-600">Currier</span>
