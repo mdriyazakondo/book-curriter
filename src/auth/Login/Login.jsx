@@ -7,7 +7,8 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Login = () => {
-  const { register, handleSubmit, reset } = useForm();
+  // register er sathe setValue add kora hoyeche
+  const { register, handleSubmit, reset, setValue } = useForm();
   const { loginUserFunc } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
@@ -39,6 +40,12 @@ const Login = () => {
         confirmButtonColor: "#f43f5e",
       });
     }
+  };
+
+  // Admin ba Librarian credentials set korar function
+  const handleAutoFill = (email, password) => {
+    setValue("email", email);
+    setValue("password", password);
   };
 
   return (
@@ -120,6 +127,24 @@ const Login = () => {
         </div>
 
         <GoogleLogin />
+
+        {/* Admin and Librarian auto-fill buttons */}
+        <div className="flex items-center justify-between mt-4 gap-2">
+          <button
+            type="button"
+            onClick={() => handleAutoFill("admin@gmail.com", "Admin123@")}
+            className="w-full bg-slate-900 dark:bg-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white font-bold py-4 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-emerald-200 dark:hover:shadow-emerald-900/20 active:scale-95 cursor-pointer"
+          >
+            Admin
+          </button>
+          <button
+            type="button"
+            onClick={() => handleAutoFill("librarian@gmail.com", "Lib12345@")}
+            className="w-full bg-slate-900 dark:bg-emerald-600 hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white font-bold py-4 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-emerald-200 dark:hover:shadow-emerald-900/20 active:scale-95 cursor-pointer"
+          >
+            Librarian
+          </button>
+        </div>
 
         <p className="text-slate-500 dark:text-slate-400 text-center mt-8 text-sm">
           Don't have an account?{" "}
