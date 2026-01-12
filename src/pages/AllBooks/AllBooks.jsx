@@ -32,8 +32,6 @@ const AllBooks = () => {
     setCurrentPage(1);
   }, [searBook, sortBook]);
 
-  if (isLoading) return <Loading />;
-
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
