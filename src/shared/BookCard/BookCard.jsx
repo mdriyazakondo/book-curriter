@@ -2,7 +2,16 @@ import React from "react";
 import { Link } from "react-router";
 
 const BookCard = ({ latest }) => {
-  const { bookName, authorName, genre, price, status, image, _id } = latest;
+  const {
+    bookName,
+    authorName,
+    genre,
+    price,
+    status,
+    image,
+    _id,
+    description,
+  } = latest;
 
   return (
     <div className="group bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl shadow-sm hover:shadow-xl dark:shadow-slate-900/50 transition-all duration-300 overflow-hidden flex flex-col h-full">
@@ -36,12 +45,13 @@ const BookCard = ({ latest }) => {
         <h2 className="text-lg font-black text-slate-900 dark:text-white line-clamp-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
           {bookName}
         </h2>
-        <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 mb-4 italic">
-          by{" "}
+        <p className="text-slate-500 dark:text-slate-400 text-sm mt-1 mb-2 italic">
+          By:{" "}
           <span className="font-semibold text-slate-700 dark:text-slate-200 not-italic">
             {authorName}
           </span>
         </p>
+        <p className="mb-3">{description.slice(0, 38)}...</p>
 
         <div className="mt-auto">
           <div className="flex justify-between items-center mb-4">
