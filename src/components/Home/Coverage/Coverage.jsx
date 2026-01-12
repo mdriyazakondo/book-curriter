@@ -29,7 +29,7 @@ const Coverage = () => {
   const center = [25.7439, 89.2752];
 
   return (
-    <div className="bg-white dark:bg-slate-950 py-16 transition-colors duration-300">
+    <div className="bg-white dark:bg-slate-950 py-16 transition-colors duration-300 w-full overflow-hidden">
       <Container>
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-2 mb-3">
