@@ -5,22 +5,24 @@ import Loading from "../../../../shared/Loading/Loading";
 import UserDataRow from "../../../../components/Dashboard/UserDataRow/UserDataRow";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { FaUsers } from "react-icons/fa";
+import { useGetAllUserQuery } from "../../../../redux/features/users/userApi";
 
 const UserManagment = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
-  const {
-    data: allUsers = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["all-user", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/all-users/${user.email}`);
-      return res.data;
-    },
-  });
-
+  // const axiosSecure = useAxiosSecure();
+  // const {
+  //   data: allUsers = [],
+  //   isLoading,
+  //   refetch,
+  // } = useQuery({
+  //   queryKey: ["all-user", user?.email],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get(`/all-users/${user.email}`);
+  //     return res.data;
+  //   },
+  // });
+  const { data, isLoading } = useGetAllUserQuery(user?.email);
+  const allUsers = data ? data : [];
   if (isLoading) return <Loading />;
 
   return (
@@ -71,7 +73,6 @@ const UserManagment = () => {
                   <UserDataRow
                     key={users._id}
                     users={users}
-                    refetch={refetch}
                   />
                 ))}
             </tbody>

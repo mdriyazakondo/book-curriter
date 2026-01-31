@@ -6,9 +6,9 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
-import { imageUpload } from "../../utils";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { imageUpload } from "../../utils"; 
 import { useState } from "react";
+import { useUserCreateMutation } from "../../redux/features/users/userApi";
 
 const Register = () => {
   const {
@@ -20,14 +20,60 @@ const Register = () => {
 
   const [isShow, setShow] = useState(false);
   const { createUserFunc } = useAuth();
-  const axiosSecure = useAxiosSecure();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from || "/";
+  const [createUser] = useUserCreateMutation();
 
   const handleRegister = async (data) => {
-    const imageFile = data.photo[0];
-    const images = await imageUpload(imageFile);
+    let images;
+    try {
+      if (!data.photo || data.photo.length === 0) {
+        Swal.fire({
+          title: "No photo selected",
+          text: "Please select a profile photo",
+          icon: "warning",
+          confirmButtonColor: "#f43f5e",
+        });
+        return;
+      }
+      Swal.fire({
+        title: "Uploading image...",
+        didOpen: () => Swal.showLoading(),
+      });
+      images = await imageUpload(data.photo[0]); 
+      Swal.close();
+    } catch (err) {
+      console.error("Image upload failed:", err);
+      Swal.fire({
+        title: "Image Upload Failed",
+        text: err.message,
+        icon: "error",
+        confirmButtonColor: "#f43f5e",
+      });
+      return;
+    }
+
+    let user;
+    try {
+      const result = await createUserFunc(data.email, data.password);
+      user = result.user;
+      localStorage.setItem("accessToken", user.accessToken);
+
+      await updateProfile(user, {
+        displayName: data.name,
+        photoURL: images,
+      });
+    } catch (err) {
+      console.error("Firebase registration failed:", err);
+      Swal.fire({
+        title: "Registration Failed",
+        text: err.message,
+        icon: "error",
+        confirmButtonColor: "#f43f5e",
+      });
+      return;
+    }
 
     try {
       const userData = {
@@ -35,40 +81,31 @@ const Register = () => {
         email: data.email,
         image: images,
       };
-
-      const result = await createUserFunc(data.email, data.password);
-      const user = result.user;
-
-      await updateProfile(user, {
-        displayName: data.name,
-        photoURL: images,
-      });
-
-      await axiosSecure.post("/users", userData);
-
+      await createUser(userData).unwrap();
+    } catch (err) {
+      console.error("Backend user creation failed:", err);
       Swal.fire({
-        title: `Welcome ${user.displayName}!`,
-        text: "Registration successful",
-        icon: "success",
-        confirmButtonColor: "#10b981",
-      });
-
-      navigate(from, { replace: true });
-      reset();
-    } catch (error) {
-      console.error(error);
-      Swal.fire({
-        title: "Registration Failed",
-        text: error.message,
+        title: "Server Error",
+        text: "Failed to save user info in backend",
         icon: "error",
         confirmButtonColor: "#f43f5e",
       });
+      return;
     }
+
+    Swal.fire({
+      title: `Welcome ${user.displayName}!`,
+      text: "Registration successful",
+      icon: "success",
+      confirmButtonColor: "#10b981",
+    });
+    navigate(from, { replace: true });
+    reset();
   };
 
   return (
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen flex items-center justify-center p-6 transition-colors duration-300">
-      <div className="bg-white dark:bg-slate-900 p-8 md:p-10 rounded-[32px] shadow-2xl shadow-slate-200 dark:shadow-none w-full max-w-xl border border-slate-100 dark:border-slate-800">
+      <div className="bg-white dark:bg-slate-900 p-8 md:p-10 rounded-4xl shadow-2xl shadow-slate-200 dark:shadow-none w-full max-w-xl border border-slate-100 dark:border-slate-800">
         <div className="text-center mb-10">
           <h2 className="text-4xl font-black text-slate-900 dark:text-white mb-2">
             Create <span className="text-emerald-600">Account</span>
@@ -79,7 +116,7 @@ const Register = () => {
         </div>
 
         <form onSubmit={handleSubmit(handleRegister)} className="space-y-5">
-       
+          {/* Name */}
           <div className="flex flex-col">
             <label className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1">
               Full Name
@@ -106,7 +143,7 @@ const Register = () => {
             )}
           </div>
 
-        
+          {/* Photo */}
           <div className="flex flex-col">
             <label className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1">
               Profile Photo
@@ -132,7 +169,7 @@ const Register = () => {
             )}
           </div>
 
-      
+          {/* Email */}
           <div className="flex flex-col">
             <label className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1">
               Email Address
@@ -159,7 +196,7 @@ const Register = () => {
             )}
           </div>
 
-      
+          {/* Password */}
           <div className="flex flex-col">
             <label className="text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider mb-2 ml-1">
               Security Password

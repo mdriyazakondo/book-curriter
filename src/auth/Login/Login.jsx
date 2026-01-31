@@ -4,13 +4,12 @@ import useAuth from "../../hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useUserCreateMutation } from "../../redux/features/users/userApi";
 
 const Login = () => {
-  // register er sathe setValue add kora hoyeche
   const { register, handleSubmit, reset, setValue } = useForm();
   const { loginUserFunc } = useAuth();
-  const axiosSecure = useAxiosSecure();
+  const [createUser] = useUserCreateMutation();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from || "/";
@@ -19,11 +18,10 @@ const Login = () => {
     try {
       const result = await loginUserFunc(data.email, data.password);
       const user = result.user;
+      console.log(user);
+      localStorage.setItem(`accessToken`, user.accessToken);
 
-      await axiosSecure.post(`/users`, {
-        email: data.email,
-      });
-
+      await createUser({ email: data.email }).unwrap();
       Swal.fire({
         title: `Welcome ${user.displayName || user.email}!`,
         text: "Login successful",
@@ -42,7 +40,6 @@ const Login = () => {
     }
   };
 
-  // Admin ba Librarian credentials set korar function
   const handleAutoFill = (email, password) => {
     setValue("email", email);
     setValue("password", password);

@@ -76,28 +76,6 @@ const Reviews = ({ reviewsPromise }) => {
           </Swiper>
         </div>
       </Container>
-
-      <style jsx global>{`
-        .swiper-pagination-bullet {
-          background: #94a3b8 !important; /* slate-400 */
-          opacity: 0.5;
-        }
-        .dark .swiper-pagination-bullet {
-          background: #475569 !important; /* slate-600 */
-        }
-        .swiper-pagination-bullet-active {
-          background: #059669 !important; /* emerald-600 */
-          width: 24px !important;
-          border-radius: 4px !important;
-          opacity: 1 !important;
-        }
-        .swiper-slide-active {
-          filter: drop-shadow(0 20px 25px -5px rgb(0 0 0 / 0.1));
-        }
-        .dark .swiper-slide-active {
-          filter: drop-shadow(0 20px 25px -5px rgb(0 0 0 / 0.4));
-        }
-      `}</style>
     </div>
   );
 };

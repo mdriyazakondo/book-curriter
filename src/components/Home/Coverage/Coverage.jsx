@@ -91,36 +91,6 @@ const Coverage = () => {
           ))}
         </div>
       </Container>
-
-      <style jsx global>{`
-        /* Dark Mode Map Filter */
-        .dark .map-container .leaflet-tile-container {
-          filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
-        }
-
-        /* Popup Styling for Dark Mode */
-        .dark .leaflet-popup-content-wrapper,
-        .dark .leaflet-popup-tip {
-          background: #1e293b !important; /* slate-800 */
-          color: white !important;
-          border: 1px solid #334155;
-        }
-
-        .dark .leaflet-popup-content h4 {
-          color: white !important;
-        }
-
-        .leaflet-popup-content-wrapper {
-          border-radius: 12px !important;
-          padding: 5px !important;
-          border: 1px solid #e2e8f0;
-        }
-
-        .leaflet-container {
-          font-family: inherit;
-          z-index: 1;
-        }
-      `}</style>
     </div>
   );
 };

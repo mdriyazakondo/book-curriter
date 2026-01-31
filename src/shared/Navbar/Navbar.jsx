@@ -1,18 +1,15 @@
 import { Link, useLocation, useNavigate } from "react-router";
 import Logo from "../Logo/Logo";
 import useAuth from "../../hooks/useAuth";
-import Swal from "sweetalert2";
 import useRole from "../../hooks/useRole";
 import { useEffect, useState } from "react";
-import { HiMoon, HiSun, HiMenuAlt3, HiX } from "react-icons/hi"; // Hamburger icons add kora hoyeche
+import { HiMoon, HiSun, HiMenuAlt3, HiX } from "react-icons/hi";
 
 const Navbar = () => {
   const location = useLocation();
   const [role] = useRole();
-  const navigate = useNavigate();
   const { user, logoutUserFunc, loading } = useAuth();
 
-  // Mobile menu-r jonno state
   const [isOpen, setIsOpen] = useState(false);
 
   const [isDark, setIsDark] = useState(
@@ -38,7 +35,6 @@ const Navbar = () => {
       ? "text-emerald-600 border-b-2 border-emerald-600 lg:border-b-2"
       : "text-slate-600 dark:text-slate-300 hover:text-emerald-500 font-medium transition-colors";
 
-  // Navigation Links array
   const navPaths = [
     { name: "Home", path: "/" },
     { name: "All Books", path: "/all-books" },
@@ -52,7 +48,7 @@ const Navbar = () => {
         <li key={path} className="list-none">
           <Link
             to={path}
-            onClick={() => setIsOpen(false)} // Click korle menu bondho hoye jabe
+            onClick={() => setIsOpen(false)} 
             className={`${isActive(
               path
             )} px-3 py-2 text-sm uppercase tracking-wider block`}
@@ -65,9 +61,8 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="sticky top-0 left-0 right-0 z-[9999] bg-white/90 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 shadow-sm transition-all duration-300">
+    <nav className="sticky top-0 left-0 right-0 z-9999 bg-white/90 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 shadow-sm transition-all duration-300">
       <div className="max-w-[1500px] mx-auto px-4 flex items-center justify-between h-16">
-        {/* Left: Logo & Mobile Menu Button */}
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -84,12 +79,10 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Center: Desktop Links */}
         <div className="hidden lg:flex items-center">
           <ul className="flex items-center gap-2">{links}</ul>
         </div>
 
-        {/* Right: Theme, User & Auth */}
         <div className="flex items-center gap-2 md:gap-4">
           <button
             onClick={toggleTheme}
@@ -152,13 +145,11 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* --- Mobile Sidebar / Menu --- */}
       <div
         className={`lg:hidden fixed inset-0 z-[-1] transition-all duration-300 ${
           isOpen ? "visible" : "invisible"
         }`}
       >
-        {/* Overlay (Background dim kora) */}
         <div
           className={`absolute inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity duration-300 ${
             isOpen ? "opacity-100" : "opacity-0"

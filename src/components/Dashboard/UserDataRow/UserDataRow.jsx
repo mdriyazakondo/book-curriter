@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import UpdateRoleModal from "../Modal/UpdateRoleModal";
 
-const UserDataRow = ({ users, refetch }) => {
+const UserDataRow = ({ users }) => {
   let [isOpen, setIsOpen] = useState(false);
   const closeModal = () => setIsOpen(false);
 
@@ -36,8 +36,8 @@ const UserDataRow = ({ users, refetch }) => {
             users?.role === "admin"
               ? "bg-slate-900 dark:bg-emerald-500 text-white dark:text-slate-900 border-slate-900 dark:border-emerald-500"
               : users?.role === "Librarian"
-              ? "bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-100 dark:border-blue-500/20"
-              : "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-500/20"
+                ? "bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-100 dark:border-blue-500/20"
+                : "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-100 dark:border-emerald-500/20"
           }`}
         >
           {users?.role}
@@ -68,12 +68,7 @@ const UserDataRow = ({ users, refetch }) => {
           Update Role
         </button>
 
-        <UpdateRoleModal
-          refetch={refetch}
-          user={users}
-          isOpen={isOpen}
-          closeModal={closeModal}
-        />
+        <UpdateRoleModal user={users} isOpen={isOpen} closeModal={closeModal} />
       </td>
     </tr>
   );

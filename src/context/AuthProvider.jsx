@@ -33,9 +33,16 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-  const logoutUserFunc = () => {
-    setLoading(true);
-    return signOut(auth);
+  const logoutUserFunc = async () => {
+    try {
+      setLoading(true);
+      localStorage.removeItem("accessToken");
+      await signOut(auth);
+      setLoading(false); 
+    } catch (error) {
+      setLoading(false);
+      console.error("Logout failed:", error);
+    }
   };
 
   useEffect(() => {

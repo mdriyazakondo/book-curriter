@@ -8,10 +8,12 @@ import {
 import React, { Fragment, useState, useEffect } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useUpdateUserMutation } from "../../../redux/features/users/userApi";
 
-const UpdateRoleModal = ({ isOpen, closeModal, user, refetch }) => {
+const UpdateRoleModal = ({ isOpen, closeModal, user }) => {
   const [updatedRole, setUpdatedRole] = useState(user?.role);
   const axiosSecure = useAxiosSecure();
+  const [updateUser] = useUpdateUserMutation();
 
   useEffect(() => {
     if (user?.role) setUpdatedRole(user.role);
@@ -35,7 +37,6 @@ const UpdateRoleModal = ({ isOpen, closeModal, user, refetch }) => {
             popup: "rounded-[24px] dark:bg-slate-900 dark:text-white",
           },
         });
-        refetch();
       }
     } catch (error) {
       Swal.fire({

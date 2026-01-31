@@ -117,26 +117,6 @@ const HeroSection = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-
-      <style jsx global>{`
-        .swiper-pagination-bullet-active {
-          background: #059669 !important;
-          width: 25px !important;
-          border-radius: 5px !important;
-        }
-        .swiper-pagination-bullet {
-          background: #94a3b8; /* slate-400 */
-        }
-        .swiper-button-next,
-        .swiper-button-prev {
-          color: #10b981 !important; /* emerald-500 */
-          transform: scale(0.4);
-        }
-        .dark .swiper-button-next,
-        .dark .swiper-button-prev {
-          color: #34d399 !important; /* emerald-400 for dark mode */
-        }
-      `}</style>
     </div>
   );
 };
