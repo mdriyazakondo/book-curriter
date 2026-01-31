@@ -14,22 +14,20 @@ import {
 import { imageUpload } from "../../../utils";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+// import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useCreateBookMutation } from "../../../redux/features/books/bookApi";
 
 const AddBook = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
+  // const axiosSecure = useAxiosSecure();
   const { register, handleSubmit, reset } = useForm();
+  const [createBook] = useCreateBookMutation();
 
   const handleBookAdd = async (data) => {
     try {
       Swal.fire({
         title: "Processing...",
-        text: "Uploading cover and saving book details",
         allowOutsideClick: false,
-        customClass: {
-          popup: "dark:bg-slate-800 dark:text-white rounded-[24px]",
-        },
         didOpen: () => Swal.showLoading(),
       });
 
@@ -39,38 +37,22 @@ const AddBook = () => {
         ...data,
         authorEmail: user.email,
         image,
-        price: parseFloat(data.price),
-        stockQuantity: parseInt(data.stockQuantity),
-        pageNumber: parseInt(data.pageNumber),
-        publishedYear: parseInt(data.publishedYear),
+        price: Number(data.price),
+        stockQuantity: Number(data.stockQuantity),
+        pageNumber: Number(data.pageNumber),
+        publishedYear: Number(data.publishedYear),
       };
 
       delete bookData.bookCover;
 
-      const res = await axiosSecure.post("/books", bookData);
+      await createBook(bookData).unwrap();
 
-      if (res.data.insertedId) {
-        Swal.fire({
-          title: "Book Added!",
-          text: "The new title has been added to the library.",
-          icon: "success",
-          confirmButtonColor: "#10b981",
-          customClass: {
-            popup: "dark:bg-slate-800 dark:text-white rounded-[24px]",
-          },
-        });
-        reset();
-      }
+      Swal.fire("Success", "Book added successfully", "success");
+      reset();
     } catch (error) {
-      Swal.fire({
-        title: "Error",
-        text: "Failed to add book. Please try again.",
-        icon: "error",
-        confirmButtonColor: "#f43f5e",
-        customClass: {
-          popup: "dark:bg-slate-800 dark:text-white rounded-[24px]",
-        },
-      });
+      console.error("BOOK ADD ERROR 👉", error);
+
+      Swal.fire("Error", error?.data?.message || "Failed to add book", "error");
     }
   };
 
