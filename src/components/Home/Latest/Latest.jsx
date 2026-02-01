@@ -1,20 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
 import Container from "../../../shared/Container/Container";
 import BookCard from "../../../shared/BookCard/BookCard";
 import Loading from "../../../shared/Loading/Loading";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router";
+import { useLatestBookQuery } from "../../../redux/features/latestBook/latestApi";
 
 const Latest = () => {
-  const axiosSecure = useAxiosSecure();
-  const { data: latests = [], isLoading } = useQuery({
-    queryKey: ["latest"],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/latest`);
-      return res.data;
-    },
-  });
+  const { data: latests = [], isLoading } = useLatestBookQuery();
 
   if (isLoading) return <Loading />;
 

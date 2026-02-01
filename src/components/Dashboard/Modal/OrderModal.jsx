@@ -10,7 +10,7 @@ import { useState, Fragment } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaExchangeAlt } from "react-icons/fa";
 
-const OrderModal = ({ isOpen, closeModal, orderPayment, refetch }) => {
+const OrderModal = ({ isOpen, closeModal, orderPayment }) => {
   const [updatedStatus, setUpdatedStatus] = useState("");
   const axiosSecure = useAxiosSecure();
 

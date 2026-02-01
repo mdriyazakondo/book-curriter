@@ -1,11 +1,12 @@
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaCreditCard, FaTimesCircle, FaCalendarAlt } from "react-icons/fa";
+import { useOrderCancelMutation } from "../../../redux/features/orders/orderSlice";
 
-const OrderTableRow = ({ order, refetch }) => {
+const OrderTableRow = ({ order }) => {
   const axiosSecure = useAxiosSecure();
+  const [orderCancel] = useOrderCancelMutation();
   const {
-    _id,
     bookName,
     authorName,
     customerName,
@@ -37,10 +38,11 @@ const OrderTableRow = ({ order, refetch }) => {
     if (!confirm.isConfirmed) return;
 
     try {
-      const res = await axiosSecure.patch(`/order-cancelled/${order._id}`, {
+      const res = await orderCancel({
+        id: order._id,
         status: "cancelled",
-      });
-      if (res.data.modifiedCount > 0) {
+      }).unwrap();
+      if (res?.modifiedCount > 0) {
         Swal.fire({
           title: "Cancelled!",
           text: "Order has been cancelled.",
@@ -124,8 +126,8 @@ const OrderTableRow = ({ order, refetch }) => {
             status === "delivered"
               ? "bg-slate-900 dark:bg-emerald-600 text-white border-slate-900 dark:border-emerald-600"
               : status === "cancelled"
-              ? "bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-700"
-              : "bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-500/20"
+                ? "bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-700"
+                : "bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-500/20"
           }`}
         >
           {status}
@@ -159,7 +161,7 @@ const OrderTableRow = ({ order, refetch }) => {
           <button
             disabled={paymentStatus === "paid" || status === "cancelled"}
             onClick={() => handlePayment(order)}
-            className="flex items-center gap-2 bg-emerald-600 hover:bg-slate-900 dark:hover:bg-emerald-500 text-white py-2 px-4 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all disabled:opacity-20 disabled:grayscale disabled:cursor-not-allowed shadow-sm active:scale-95"
+            className="flex items-center cursor-pointer gap-2 bg-emerald-600 hover:bg-slate-900 dark:hover:bg-emerald-500 text-white py-2 px-4 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all disabled:opacity-20 disabled:grayscale disabled:cursor-not-allowed shadow-sm active:scale-95"
           >
             <FaCreditCard size={12} /> Pay
           </button>

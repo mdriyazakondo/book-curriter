@@ -1,27 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
 import MyBookTable from "../../../components/Dashboard/TableRow/MyBookTable";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import Loading from "../../../shared/Loading/Loading";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import {
+  useDeleteBooksMutation,
+  useMyAllBooksQuery,
+} from "../../../redux/features/books/bookApi";
 
 const MyBook = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
 
-  const {
-    data: books = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["my-books", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/my-books/${user?.email}`);
-      return res.data;
-    },
-  });
+  const [deleteBook, { isLoading: isDeleting }] = useDeleteBooksMutation();
 
-  const handleDelete = async (id, refetch) => {
+  const { data: books = [], isLoading } = useMyAllBooksQuery(user?.email);
+
+  const handleDelete = async (id) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
       text: "This action will permanently remove the book from your list.",
@@ -38,18 +31,14 @@ const MyBook = () => {
     if (!confirm.isConfirmed) return;
 
     try {
-      const res = await axiosSecure.delete(`/books/${id}`);
-      if (res.data.deletedCount > 0) {
+      const res = await deleteBook(id).unwrap();
+      if (res?.deletedCount > 0) {
         Swal.fire({
           title: "Deleted!",
           text: "The book has been successfully removed.",
           icon: "success",
           confirmButtonColor: "#10b981",
-          customClass: {
-            popup: "rounded-[24px] dark:bg-slate-800 dark:text-white",
-          },
         });
-        refetch();
       }
     } catch (error) {
       Swal.fire({
@@ -69,10 +58,11 @@ const MyBook = () => {
 
   return (
     <div className="animate-in fade-in duration-700">
+      {/* Header */}
       <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h2 className="text-3xl font-black text-slate-900 dark:text-white">
-            My
+            My{" "}
             <span className="text-emerald-600 dark:text-emerald-400">
               Library
             </span>
@@ -93,30 +83,25 @@ const MyBook = () => {
           <table className="min-w-full leading-normal">
             <thead>
               <tr className="bg-slate-50/80 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800">
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[2px] text-center">
-                  Cover
-                </th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[2px]">
-                  Book Name
-                </th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[2px]">
-                  Author
-                </th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[2px] text-center">
-                  Added On
-                </th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[2px]">
-                  Price
-                </th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[2px] text-center">
-                  Lang
-                </th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[2px] text-center">
-                  Status
-                </th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[2px] text-right">
-                  Actions
-                </th>
+                {[
+                  { label: "Cover", center: true },
+                  { label: "Book Name" },
+                  { label: "Author" },
+                  { label: "Added On", center: true },
+                  { label: "Price" },
+                  { label: "Lang", center: true },
+                  { label: "Status", center: true },
+                  { label: "Actions", right: true },
+                ].map((th, i) => (
+                  <th
+                    key={i}
+                    className={`px-6 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[2px] ${
+                      th.center ? "text-center" : th.right ? "text-right" : ""
+                    }`}
+                  >
+                    {th.label}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
@@ -124,8 +109,8 @@ const MyBook = () => {
                 <MyBookTable
                   key={book._id}
                   book={book}
-                  refetch={refetch}
-                  handleDelete={(id) => handleDelete(id, refetch)}
+                  handleDelete={handleDelete}
+                  isDeleting={isDeleting}
                 />
               ))}
             </tbody>

@@ -79,7 +79,6 @@ const OrderTable = ({ orderPayment, refetch }) => {
         </button>
 
         <OrderModal
-          refetch={refetch}
           orderPayment={orderPayment}
           isOpen={isOpen}
           closeModal={closeModal}

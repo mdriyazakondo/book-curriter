@@ -14,7 +14,33 @@ export const orderSlice = createApi({
       }),
       invalidatesTags: ["order"],
     }),
+    myBookOrder: builder.query({
+      query: (email) => ({
+        url: `orders/${email}/payments`,
+        method: "GET",
+      }),
+      providesTags: ["order"],
+    }),
+    myOrderData: builder.query({
+      query: (email) => ({
+        url: `orders/${email}`,
+        method: "GET",
+      }),
+      providesTags: ["order"],
+    }),
+    orderCancel: builder.mutation({
+      query: ({ id, status }) => ({
+        url: `order-cancelled/${id}`,
+        method: "PATCH",
+        body: { status },
+      }),
+    }),
   }),
 });
 
-export const { useCreateOrderMutation } = orderSlice;
+export const {
+  useCreateOrderMutation,
+  useMyBookOrderQuery,
+  useMyOrderDataQuery,
+  useOrderCancelMutation,
+} = orderSlice;

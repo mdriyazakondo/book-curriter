@@ -29,6 +29,45 @@ export const bookApi = createApi({
       }),
       invalidatesTags: ["book"],
     }),
+    // dashboard
+    myAllBooks: builder.query({
+      query: (email) => ({
+        url: `my-books/${email}`,
+        method: "GET",
+      }),
+      providesTags: ["book"],
+    }),
+    deleteBooks: builder.mutation({
+      query: (id) => ({
+        url: `books/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["book"],
+    }),
+
+    bookUpdate: builder.mutation({
+      query: ({ id, status }) => ({
+        url: `books/${id}`,
+        method: "PATCH",
+        body: { status },
+      }),
+      invalidatesTags: ["book"],
+    }),
+    myBookUpdate: builder.mutation({
+      query: ({ id, bookData }) => ({
+        url: `books/${id}`,
+        method: "PUT",
+        body: bookData,
+      }),
+      invalidatesTags: ["book"],
+    }),
+    updateBookById: builder.query({
+      query: (id) => ({
+        url: `update-book/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["book"],
+    }),
   }),
 });
 
@@ -36,4 +75,9 @@ export const {
   useGetAllBooksQuery,
   useCreateBookMutation,
   useGetBookByIdQuery,
+  useMyAllBooksQuery,
+  useDeleteBooksMutation,
+  useBookUpdateMutation,
+  useMyBookUpdateMutation,
+  useUpdateBookByIdQuery,
 } = bookApi;

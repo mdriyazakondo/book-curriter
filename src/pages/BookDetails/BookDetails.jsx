@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router";
 import Loading from "../../shared/Loading/Loading";
 import useAuth from "../../hooks/useAuth";
@@ -16,13 +15,15 @@ import {
   FaFeatherAlt,
 } from "react-icons/fa";
 import { useGetBookByIdQuery } from "../../redux/features/books/bookApi";
+import { useCreateWishListMutation } from "../../redux/features/wishList/wishListApi";
 
 const BookDetails = () => {
   const { user } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const { data: book = [], isLoading } = useGetBookByIdQuery(id);
+  const [createWishList] = useCreateWishListMutation();
+  const { data: book = {}, isLoading } = useGetBookByIdQuery(id);
 
   const handleWishList = async (books) => {
     const bookWishListData = {
@@ -35,8 +36,8 @@ const BookDetails = () => {
     };
 
     try {
-      const res = await axiosSecure.post(`/wish-list`, bookWishListData);
-      if (res.data.insertedId) {
+      const res = await createWishList(bookWishListData).unwrap();
+      if (res?.insertedId) {
         Swal.fire({
           title: "Added!",
           text: "Saved to your wishlist.",

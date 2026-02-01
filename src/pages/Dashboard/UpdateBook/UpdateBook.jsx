@@ -14,22 +14,19 @@ import { imageUpload } from "../../../utils";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useParams, useNavigate } from "react-router";
-import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../shared/Loading/Loading";
+import {
+  useMyBookUpdateMutation,
+  useUpdateBookByIdQuery,
+} from "../../../redux/features/books/bookApi";
 
 const UpdateBook = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
+  const [myBookUpdate] = useMyBookUpdateMutation();
+  const { data: updateBooks = {}, isLoading } = useUpdateBookByIdQuery(id);
   const { register, handleSubmit, reset } = useForm();
-
-  const { data: updateBooks = {}, isLoading } = useQuery({
-    queryKey: ["updateBooks", id],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/update-book/${id}`);
-      return res.data;
-    },
-  });
 
   useEffect(() => {
     if (updateBooks) {
@@ -67,9 +64,9 @@ const UpdateBook = () => {
       delete bookData.bookCover;
       delete bookData._id;
 
-      const res = await axiosSecure.put(`/books/${id}`, bookData);
+      const res = await myBookUpdate({ id, bookData }).unwrap();
 
-      if (res.data.modifiedCount > 0) {
+      if (res.modifiedCount > 0) {
         Swal.fire({
           title: "Successfully Updated!",
           text: `${data.bookName} has been modified.`,

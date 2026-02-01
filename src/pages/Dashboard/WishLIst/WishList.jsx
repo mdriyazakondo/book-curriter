@@ -1,5 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../shared/Loading/Loading";
 import Swal from "sweetalert2";
 import {
@@ -8,22 +6,14 @@ import {
   FaRegCalendarAlt,
   FaUserEdit,
 } from "react-icons/fa";
+import {
+  useDeleteWishListMutation,
+  useGetAllWishListQuery,
+} from "../../../redux/features/wishList/wishListApi";
 
 const WishList = () => {
-  const axiosSecure = useAxiosSecure();
-
-  const {
-    data: wishLists = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["wishLists"],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/wish-list`);
-      return res.data;
-    },
-  });
-
+  const { data: wishLists = [], isLoading } = useGetAllWishListQuery();
+  const [deleteWishList] = useDeleteWishListMutation();
   const handleWishListDelete = async (id) => {
     const result = await Swal.fire({
       title: "Remove from Wishlist?",
@@ -43,8 +33,8 @@ const WishList = () => {
 
     if (result.isConfirmed) {
       try {
-        const res = await axiosSecure.delete(`/wish-list/${id}`);
-        if (res.data.deletedCount > 0) {
+        const res = await deleteWishList(id).unwrap();
+        if (res?.deletedCount > 0) {
           Swal.fire({
             title: "Removed!",
             text: "Book removed successfully.",
@@ -55,7 +45,6 @@ const WishList = () => {
               popup: "rounded-[24px] dark:bg-slate-900 dark:text-white",
             },
           });
-          refetch();
         }
       } catch (error) {
         Swal.fire({
@@ -171,7 +160,7 @@ const WishList = () => {
                                   day: "2-digit",
                                   month: "short",
                                   year: "numeric",
-                                }
+                                },
                               )
                             : "N/A"}
                         </span>

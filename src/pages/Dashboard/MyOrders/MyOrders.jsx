@@ -5,28 +5,17 @@ import OrderTableRow from "../../../components/Dashboard/OrderTableRow/OrderTabl
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaBox, FaWallet, FaShoppingBag, FaHistory } from "react-icons/fa";
 import Loading from "../../../shared/Loading/Loading";
+import { useMyOrderDataQuery } from "../../../redux/features/orders/orderSlice";
 
 const MyOrders = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
-
-  const {
-    data: orders = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["orders", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/orders/${user?.email}`);
-      return res.data;
-    },
-  });
+  const { data: orders = [], isLoading } = useMyOrderDataQuery(user?.email);
 
   if (isLoading) return <Loading />;
 
   const totalSpent = orders.reduce(
     (acc, curr) => acc + (parseFloat(curr.price) || 0),
-    0
+    0,
   );
 
   return (
@@ -112,7 +101,7 @@ const MyOrders = () => {
                   <OrderTableRow
                     order={order}
                     key={order._id}
-                    refetch={refetch}
+                 
                   />
                 ))
               ) : (

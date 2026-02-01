@@ -18,7 +18,6 @@ const Login = () => {
     try {
       const result = await loginUserFunc(data.email, data.password);
       const user = result.user;
-      console.log(user);
       localStorage.setItem(`accessToken`, user.accessToken);
 
       await createUser({ email: data.email }).unwrap();

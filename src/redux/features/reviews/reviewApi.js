@@ -21,6 +21,14 @@ export const reviewApi = createApi({
       }),
       invalidatesTags: ["review"],
     }),
+    createWishList: builder.mutation({
+      query: (data) => ({
+        url: "wish-list",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["review"],
+    }),
   }),
 });
 

@@ -1,27 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import Loading from "../../../shared/Loading/Loading";
 import InvoicesTable from "../../../components/Dashboard/Invoices/InvoicesTable";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaFileInvoiceDollar, FaCheckCircle, FaReceipt } from "react-icons/fa";
+import { useGetInvoiceQuery } from "../../../redux/features/invoices/invoice";
 
 const Invoices = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
-
-  const { data: payments = [], isLoading } = useQuery({
-    queryKey: ["payments", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/payments/${user?.email}`);
-      return res.data;
-    },
-  });
+  const { data: payments = [], isLoading } = useGetInvoiceQuery(user?.email);
 
   if (isLoading) return <Loading />;
 
   const totalPaid = payments.reduce(
     (acc, curr) => acc + (parseFloat(curr.price) || 0),
-    0
+    0,
   );
 
   return (

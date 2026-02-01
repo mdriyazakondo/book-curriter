@@ -68,12 +68,7 @@ const MyBookTable = ({ book, handleDelete, refetch }) => {
           {status}
         </button>
 
-        <BookModal
-          refetch={refetch}
-          isOpen={isOpen}
-          closeModal={closeModal}
-          bookId={book._id}
-        />
+        <BookModal isOpen={isOpen} closeModal={closeModal} bookId={book._id} />
       </td>
 
       <td className="px-6 py-4 whitespace-nowrap text-right">

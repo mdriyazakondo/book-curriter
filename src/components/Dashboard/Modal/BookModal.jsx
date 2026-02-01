@@ -9,10 +9,11 @@ import Swal from "sweetalert2";
 import { useState, Fragment } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaBookReader } from "react-icons/fa";
+import { useBookUpdateMutation } from "../../../redux/features/books/bookApi";
 
-const BookModal = ({ isOpen, closeModal, bookId, refetch }) => {
+const BookModal = ({ isOpen, closeModal, bookId }) => {
   const [updatedStatus, setUpdatedStatus] = useState("");
-  const axiosSecure = useAxiosSecure();
+  const [updateBook, { isLoading }] = useBookUpdateMutation();
 
   const handleUpdate = async () => {
     if (!updatedStatus) {
@@ -37,18 +38,18 @@ const BookModal = ({ isOpen, closeModal, bookId, refetch }) => {
     if (!confirm.isConfirmed) return;
 
     try {
-      const res = await axiosSecure.patch(`/books/${bookId}`, {
+      const res = await updateBook({
+        id: bookId,
         status: updatedStatus,
-      });
+      }).unwrap();
 
-      if (res.data.modifiedCount > 0) {
+      if (res.modifiedCount > 0) {
         Swal.fire({
           title: "Success!",
           text: "Book visibility updated successfully.",
           icon: "success",
           confirmButtonColor: "#10b981",
         });
-        refetch();
         closeModal();
       }
     } catch (error) {
@@ -64,7 +65,7 @@ const BookModal = ({ isOpen, closeModal, bookId, refetch }) => {
 
   return (
     <Transition show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-[100]" onClose={closeModal}>
+      <Dialog as="div" className="relative z-100" onClose={closeModal}>
         <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"

@@ -4,33 +4,23 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import OrderTable from "../../../components/Dashboard/OrderTable/OrderTable";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useMyBookOrderQuery } from "../../../redux/features/orders/orderSlice";
 
 const Orders = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
-
-  const {
-    data: orderPayments = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["orderPayments", user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/orders/${user?.email}/payments`);
-      return res.data;
-    },
-  });
+  const { data: orderPayments = [], isLoading } = useMyBookOrderQuery(
+    user?.email,
+  );
 
   if (isLoading) return <Loading />;
 
   const totalSpent = orderPayments.reduce(
     (acc, curr) => acc + (parseFloat(curr.price) || 0),
-    0
+    0,
   );
 
   return (
     <div className="animate-in fade-in duration-700">
-
       <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h2 className="text-3xl font-black text-slate-900 dark:text-white">
@@ -61,7 +51,6 @@ const Orders = () => {
         </div>
       </div>
 
- 
       <div className="bg-white dark:bg-slate-900 rounded-4xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden transition-colors">
         <div className="overflow-x-auto">
           <table className="min-w-full leading-normal">
@@ -96,7 +85,6 @@ const Orders = () => {
                   <OrderTable
                     key={orderPayment._id}
                     orderPayment={orderPayment}
-                    refetch={refetch}
                   />
                 ))
               ) : (
