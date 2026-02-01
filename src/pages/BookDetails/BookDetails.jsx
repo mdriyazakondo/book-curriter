@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router";
 import Loading from "../../shared/Loading/Loading";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import BookRating from "../../components/BookRaring/BookRating";
 import BookOrderModal from "../../components/Dashboard/Modal/BookOrderModal";
 import { useState } from "react";
@@ -16,21 +15,14 @@ import {
   FaHashtag,
   FaFeatherAlt,
 } from "react-icons/fa";
+import { useGetBookByIdQuery } from "../../redux/features/books/bookApi";
 
 const BookDetails = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-
-  const { data: book = {}, isLoading } = useQuery({
-    queryKey: ["book", id],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/books/${id}`);
-      return res.data;
-    },
-  });
+  const { data: book = [], isLoading } = useGetBookByIdQuery(id);
 
   const handleWishList = async (books) => {
     const bookWishListData = {

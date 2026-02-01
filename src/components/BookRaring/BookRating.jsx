@@ -10,6 +10,10 @@ import {
   FaCheckCircle,
   FaComments,
 } from "react-icons/fa";
+import {
+  useCreateReviewMutation,
+  useMyReviewsQuery,
+} from "../../redux/features/reviews/reviewApi";
 
 const BookRating = ({ book }) => {
   const [rating, setRating] = useState(0);
@@ -17,14 +21,8 @@ const BookRating = ({ book }) => {
   const [reviewText, setReviewText] = useState("");
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-
-  const { data: reviews = [], refetch } = useQuery({
-    queryKey: ["reviews", book._id],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/review/${book._id}`);
-      return res.data;
-    },
-  });
+  const [createReview] = useCreateReviewMutation();
+  const { data: reviews = [] } = useMyReviewsQuery(book?._id);
 
   const handleRating = async () => {
     if (!rating || !reviewText.trim()) {
@@ -53,8 +51,8 @@ const BookRating = ({ book }) => {
     };
 
     try {
-      const res = await axiosSecure.post("/review", ratingData);
-      if (res.data.insertedId) {
+      const res = await createReview(ratingData).unwrap();
+      if (res?.insertedId) {
         Swal.fire({
           title: "Review Published!",
           text: "Thank you for sharing your thoughts.",
@@ -70,7 +68,6 @@ const BookRating = ({ book }) => {
         });
         setRating(0);
         setReviewText("");
-        refetch();
       }
     } catch (error) {
       Swal.fire("Error", "Could not post review", "error");

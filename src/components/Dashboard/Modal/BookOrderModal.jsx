@@ -7,7 +7,6 @@ import {
 } from "@headlessui/react";
 import React, { Fragment } from "react";
 import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
@@ -18,11 +17,12 @@ import {
   FaEnvelope,
   FaBook,
 } from "react-icons/fa";
+import { useCreateOrderMutation } from "../../../redux/features/orders/orderSlice";
 
 const BookOrderModal = ({ isOpen, closeModal, book }) => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const [createOrder] = useCreateOrderMutation();
 
   const {
     register,
@@ -69,8 +69,9 @@ const BookOrderModal = ({ isOpen, closeModal, book }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await axiosSecure.post(`/orders`, bookOrderData);
-          if (res.data?.insertedId) {
+          const res = await createOrder(bookOrderData).unwrap(); // ✅ unwrap returns actual response
+
+          if (res?.insertedId) {
             Swal.fire({
               title: "Success!",
               text: "Redirecting to payment...",
@@ -80,8 +81,9 @@ const BookOrderModal = ({ isOpen, closeModal, book }) => {
             });
             closeModal();
 
-            if (res.data.url) {
-              window.location.replace(res.data.url);
+            if (res?.url) {
+              // ✅ no `.data` here
+              window.location.replace(res.url);
             } else {
               navigate("/dashboard/my-orders");
             }
@@ -119,7 +121,7 @@ const BookOrderModal = ({ isOpen, closeModal, book }) => {
               leaveFrom="opacity-100 scale-100 translate-y-0"
               leaveTo="opacity-0 scale-95 translate-y-4"
             >
-              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-[32px] bg-white dark:bg-slate-900 p-8 text-left align-middle shadow-2xl transition-all border border-slate-100 dark:border-slate-800">
+              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-4xl bg-white dark:bg-slate-900 p-8 text-left align-middle shadow-2xl transition-all border border-slate-100 dark:border-slate-800">
                 <DialogTitle
                   as="h3"
                   className="text-2xl font-black leading-6 text-slate-900 dark:text-white mb-2 flex items-center gap-2"
