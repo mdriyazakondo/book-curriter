@@ -7,16 +7,17 @@ export const bookApi = createApi({
   tagTypes: ["book"],
   endpoints: (builder) => ({
     getAllBooks: builder.query({
-      query: () => ({
+      query: ({ search = "", sort = "" } = {}) => ({
         url: `books`,
         method: "GET",
+        params: { search, sort },
       }),
-      providerTags: ["book"],
+      providesTags: ["book"],
     }),
     createBook: builder.mutation({
       query: (data) => ({
         url: "books",
-        method: 'POST',
+        method: "POST",
         body: data,
       }),
       invalidatesTags: ["book"],

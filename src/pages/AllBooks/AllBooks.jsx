@@ -3,29 +3,23 @@ import { useState, useEffect } from "react";
 import Loading from "../../shared/Loading/Loading";
 import BookCard from "../../shared/BookCard/BookCard";
 import Container from "../../shared/Container/Container";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import {
   FaSearch,
   FaSortAmountDown,
   FaChevronLeft,
   FaChevronRight,
 } from "react-icons/fa";
+import { useGetAllBooksQuery } from "../../redux/features/books/bookApi";
 
 const AllBooks = () => {
-  const axiosSecure = useAxiosSecure();
   const [searBook, setSearchBook] = useState("");
   const [sortBook, setSortBook] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const booksPerPage = 8;
 
-  const { data: books = [], isLoading } = useQuery({
-    queryKey: ["books", searBook, sortBook],
-    queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/books?sort=${sortBook}&search=${searBook}`
-      );
-      return res.data;
-    },
+  const { data: books = [], isLoading } = useGetAllBooksQuery({
+    search: searBook,
+    sort: sortBook,
   });
 
   useEffect(() => {
@@ -85,27 +79,31 @@ const AllBooks = () => {
             </div>
           </div>
         </div>
-
-        {currentBooks.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {currentBooks.map((latest) => (
-              <div
-                key={latest?._id}
-                className="animate-in fade-in slide-in-from-bottom-4 duration-500"
-              >
-                <BookCard latest={latest} />
-              </div>
-            ))}
-          </div>
+        {isLoading ? (
+          <Loading />
         ) : (
-          <div className="py-20 text-center">
-            <div className="text-6xl mb-4">🔍</div>
-            <p className="text-slate-400 dark:text-slate-600 font-bold uppercase tracking-widest text-sm">
-              No books found for your search.
-            </p>
-          </div>
+          <>
+            {currentBooks.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                {currentBooks.map((latest) => (
+                  <div
+                    key={latest?._id}
+                    className="animate-in fade-in slide-in-from-bottom-4 duration-500"
+                  >
+                    <BookCard latest={latest} />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="py-20 text-center">
+                <div className="text-6xl mb-4">🔍</div>
+                <p className="text-slate-400 dark:text-slate-600 font-bold uppercase tracking-widest text-sm">
+                  No books found for your search.
+                </p>
+              </div>
+            )}
+          </>
         )}
-
         {totalPages > 1 && (
           <div className="flex justify-center items-center gap-2 mt-16">
             <button

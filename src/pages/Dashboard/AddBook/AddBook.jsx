@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import {
   FaBook,
@@ -14,12 +13,10 @@ import {
 import { imageUpload } from "../../../utils";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
-// import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useCreateBookMutation } from "../../../redux/features/books/bookApi";
 
 const AddBook = () => {
   const { user } = useAuth();
-  // const axiosSecure = useAxiosSecure();
   const { register, handleSubmit, reset } = useForm();
   const [createBook] = useCreateBookMutation();
 
