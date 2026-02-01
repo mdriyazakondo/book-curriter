@@ -1,8 +1,8 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3000/",
-  // baseUrl: "https://server-pi-mocha.vercel.app/",
+  // baseUrl: "http://localhost:3000/",
+  baseUrl: "https://server-pi-mocha.vercel.app/",
   prepareHeaders: (headers) => {
     const token = localStorage.getItem("accessToken");
     if (token) {
