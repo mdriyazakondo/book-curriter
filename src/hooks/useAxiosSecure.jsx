@@ -20,7 +20,7 @@ const useAxiosSecure = () => {
       (config) => {
         config.headers.Authorization = `Bearer ${user?.accessToken}`;
         return config;
-      }
+      },
     );
 
     const responsiveInterceptor = axiosInstance.interceptors.response.use(
@@ -35,7 +35,7 @@ const useAxiosSecure = () => {
           navigate("/login");
         }
         return Promise.reject(err);
-      }
+      },
     );
 
     return () => {

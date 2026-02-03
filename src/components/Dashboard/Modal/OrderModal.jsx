@@ -88,7 +88,7 @@ const OrderModal = ({ isOpen, closeModal, orderPayment }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-[32px] bg-white p-8 shadow-2xl transition-all border border-slate-100">
+              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-4xl bg-white p-8 shadow-2xl transition-all border border-slate-100">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mb-4">
                     <FaExchangeAlt size={24} />
